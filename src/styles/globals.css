@@ -1359,4 +1359,303 @@ h1 {
   }
 }
 
+/* Modal of collections page*/
 
+.modal {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  }
+  
+  .crossBtn {
+  height: 50px;
+  width: 50px;
+  position: fixed;
+  top: 60px;
+  right: 7%;
+  z-index: 10;
+  }
+  
+  .modal-content::after {
+  position: absolute;
+  content: '';
+  height: 104px;
+  width: 62px;
+  left: -24px;
+  bottom: 0px;
+  margin-bottom: -30px;
+  transform: rotate3d(0, 0, 1, -38deg);
+  border-right: 2px solid white;
+  
+  }
+  
+  .modal-content::before {
+  position: absolute;
+  content: '';
+  
+  height: 102px;
+  width: 62px;
+  right: 0;
+  margin-right: -22px;
+  margin-top: -30px;
+  transform: rotate3d(0, 0, 1, 141deg);
+  background: initial;
+  border-right: 1.5px solid white;
+  z-index: 2;
+  
+  }
+  
+  .modal-content {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  height: 70%;
+  width: 80%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 100px;
+  margin: auto;
+  margin-left: 20px;
+  z-index: 7;
+  background-image: linear-gradient(to left, transparent 65px, white 25px),
+  linear-gradient(to bottom, transparent 79px, white 25px),
+  linear-gradient(to right, transparent 62px, white 20px),
+  linear-gradient(to top, transparent 80px, white 20px);
+  background-position: 100% 0, 100% 0, 0 100%, 0 100%;
+  background-size: 100% 1px, 1px 100%;
+  background-repeat: no-repeat;
+  border-top-right-radius: 74px;
+  }
+  
+  .test {
+  z-index: 4;
+  }
+  
+  .leftSide {
+  width: 48%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+  
+  .rightSide {
+  width: 48%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  }
+  
+  .modalImg {
+  height: 80%;
+  width: 80%;
+  }
+  
+  .BackStory {
+  
+  height: 30%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  
+  background-image: linear-gradient(to left, transparent 31px, white 25px),
+  linear-gradient(to bottom, transparent 40px, white 25px),
+  linear-gradient(to right, transparent -25px, white 20px),
+  linear-gradient(to top, transparent -25px, white 20px);
+  background-position: 100% 0, 100% 0, 0 100%, 0 100%;
+  background-size: 100% 1px, 1px 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+  }
+  
+  .BackStory::before {
+  position: absolute;
+  content: '';
+  height: 50px;
+  width: 62px;
+  right: 0;
+  top: 0;
+  margin-right: -39px;
+  margin-top: -24px;
+  transform: rotate3d(0, 0, 1, 141deg);
+  background: initial;
+  border-right: 1.5px solid white;
+  z-index: 2;
+  
+  }
+  
+  .ClosetItems {
+  height: 45%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  }
+  
+  .ProfieInfo {
+  height: 15%;
+  width: 94%;
+  display: flex;
+  align-items: center;
+  }
+  
+  .closet-item {
+  position: relative;
+  margin-right: 1.5%;
+  width: 31%;
+  height: 18%;
+  padding-left: 2%;
+  background-image: linear-gradient(to left, transparent 12px, white 25px),
+  linear-gradient(to bottom, transparent 16px, white 25px),
+  linear-gradient(to right, transparent 8px, white 20px),
+  linear-gradient(to top, transparent 10px, white 20px);
+  background-position: 100% 0, 100% 0, 0 100%, 0 100%;
+  background-size: 100% 1px, 1px 100%;
+  background-repeat: no-repeat;
+  
+  }
+  
+  .closet-item::before {
+  position: absolute;
+  content: '';
+  height: 24px;
+  width: 62px;
+  right: 0;
+  margin-right: -47px;
+  margin-top: -21px;
+  transform: rotate3d(0, 0, 1, 141deg);
+  background: initial;
+  border-right: 1.5px solid white;
+  z-index: 2;
+  
+  }
+  
+  .closet-item::after {
+  position: absolute;
+  content: '';
+  height: 18px;
+  width: 62px;
+  left: 0;
+  bottom: 0;
+  margin-bottom: 18px;
+  /* bottom: 17px; */
+  margin-left: -1px;
+  /* margin-top: 56.7px; */
+  transform: rotate3d(0, 0, 1, 141deg);
+  background: initial;
+  border-right: 1.5px solid white;
+  z-index: 2;
+  
+  }
+  
+  .ProfieInfo-content {
+  width: 70%;
+  height: 100%;
+  
+  }
+  
+  .ProfieInfo-content>h1,
+  .ProfieInfo-content>div {
+  min-width: 200px;
+  }
+  
+  .ProfieInfo-content>div>p {
+  min-width: fit-content;
+  }
+  
+  .Profie-picture {
+  width: 100%;
+  height: 100%;
+  }
+  
+  .ProfieInfo-picture {
+  width: 15%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+  
+  .BackStory-content {
+  height: 60%;
+  margin-left: 2%;
+  font-size: 12px;
+  }
+  
+  .BackStory-head {
+  margin-left: 2%;
+  height: 20%;
+  }
+  
+  .ProfieInfo-Inner-content {
+  display: flex;
+  }
+  
+  .Image {
+  height: 60%;
+  width: 60%;
+  }
+  
+  .profile::before {
+  /* position: absolute;
+  content: '';
+  height: 73px;
+  width: 114px;
+  top: -42px;
+  background: white;
+  z-index: 2; */
+  }
+  .profile::after {
+  /* position: absolute;
+  content: '';
+  height: 20px;
+  width: 20px;
+  top: 21px;
+  transform: rotate3d(0, 0, 1, 135deg);
+  background: white;
+  z-index: 2; */
+  }
+  @media (max-width:1200px) {
+  
+  .closet-item {
+  
+  width: 45%;
+  padding-left: 5px;
+  }
+  }
+  
+  @media (max-width:1800px) {
+  .crossBtn {
+  }
+  }
+  @media (max-width:700px) {
+  
+  .closet-item {
+  width: 100%;
+  margin: 2.5px 0px 2.5px 0px;
+  padding-left: 5px;
+  }
+  
+  .ClosetItems {
+  overflow-y: auto;
+  overflow-x: hidden;
+  }
+  .crossBtn {
+  }
+  .Image {
+  height: 30%;
+  width: 80%;
+  }
+  
+  }
+  
+  

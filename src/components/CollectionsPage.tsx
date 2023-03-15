@@ -9,8 +9,11 @@ import { FaTimes } from 'react-icons/fa';
 function CollectionsPage() {
   const style = { color: "white", fontSize: "4em" }
 
+  const [openModal, setOpenModal] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
- 
+  const handleClick = () => {
+    setOpenModal(true);
+  }
   const handleToggleSideTab = () => {
     setOpenMenu(!openMenu);
   };
@@ -23,6 +26,7 @@ function CollectionsPage() {
         backgroundSize: "cover",
       }}
     >
+
       <Navbar />
       <div className="main-collection flex flex-col items-center mt-20">
         <h1 className="font-bugfast xl:text-6xl text-white">
@@ -108,8 +112,98 @@ function CollectionsPage() {
               />
             </div>
           </div>
+          <button onClick={handleClick}>Click Me to OPen modal</button>
           <div className="collection-gallery">
+            {openModal && <>
+              <div className="modal">
+                <div className='crossBtn flex justify-center items-center'>
+                  <FaTimes style={style} onClick={() => setOpenModal(false)} />
+                </div>
+                <div className="modal-content">
+                  <div className="leftSide">
+                    <Image
+                      className="modalImg"
+                      src="/modalPic.png"
+                      alt="col-icon"
+                      height={100}
+                      width={100}
+                    />
+                  </div>
+                  <div className="rightSide">
+                    <div className="ProfieInfo">
+                      <div className="ProfieInfo-picture">
+                        <div className="logo">
+                          <Image
+                            className="Profie-picture"
+                            src="/logo.png"
+                            alt="col-icon"
+                            height={100}
+                            width={100}
+                          />
+                        </div>
+                      </div>
+                      <div className="ProfieInfo-content flex flex-col justify-center overflow-hidden">
+                        <h1 className="text-xs sm:text-sm w-fit md:text-sm lg:text-lg xl:text-xl 2xl:text-2xl">SPACE DEFENDER NO. 1234</h1>
+                        <div className="ProfieInfo-Inner-content"> <h1 className="text-xs sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">NO. </h1>  <p className="text-xs leading-5 font-light w-fit sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl"> 1234 |  &zwnj; </p> <h1 className="text-xs sm:text-sm   md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">OWNER:</h1> <p className="text-xs leading-5 font-light sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">VerbalTachi</p></div>
+                      </div>
+                      <div className="ProfieInfo-picture profile">
+                        <div className="Image">
+                          <Image
+                            className="Profie-picture"
+                            src="/aurora-collection-icon-01.png"
+                            alt="col-icon"
+                            height={20}
+                            width={20}
+                          />
+                        </div>
 
+                      </div>
+
+                    </div>
+                    <div className="ClosetItems">
+                      <div className="closet-item">
+                        <div className="closet-item-content flex flex-col w-full h-full justify-center">
+                          <h1 className="text-sm py-0 my-0 leading-4">BACKGROUND</h1>
+                          <p className="text-sm font-thin py-0 my-0 leading-4">Dark Matter</p>
+                        </div>
+                      </div>
+                      <div className="closet-item">
+
+                      </div>
+                      <div className="closet-item">
+
+                      </div>
+                      <div className="closet-item">
+
+                      </div>
+                      <div className="closet-item">
+
+                      </div>
+                      <div className="closet-item">
+
+                      </div>
+                      <div className="closet-item">
+
+                      </div>
+                      <div className="closet-item">
+
+                      </div>
+                      <div className="closet-item">
+
+                      </div>
+                      <div className="closet-item">
+
+                      </div>
+                    </div>
+                    <div className="BackStory">
+                      <h1 className="BackStory-head">BackStory</h1>
+                      <p className="BackStory-content">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla veniam fugit ex beatae officiis ad ratione eligendi atque. Consectetur quia accusamus provident rem sunt maiores quaerat odit inventore natus culpa.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+            }
             <div className="sideTab">
               {openMenu && <>
                 <div className="sideTabContent">
@@ -119,7 +213,7 @@ function CollectionsPage() {
                       <div className="rightContent">
                         <p>33</p>
                         <Image
-                          className='dropSign'
+                        className='dropSign'
                           src="/inv.png"
                           alt="col-icon"
                           height={30}
@@ -132,7 +226,7 @@ function CollectionsPage() {
                       <div className="rightContent">
                         <p>33</p>
                         <Image
-                          className='dropSign'
+                        className='dropSign'
                           src="/inv.png"
                           alt="col-icon"
                           height={30}
@@ -156,7 +250,7 @@ function CollectionsPage() {
                       <div className="rightContent">
                         <p>33</p>
                         <Image
-                          className='dropSign'
+                        className='dropSign'
                           src="/inv.png"
                           alt="col-icon"
                           height={30}
@@ -168,7 +262,7 @@ function CollectionsPage() {
                       <div className="rightContent">
                         <p>33</p>
                         <Image
-                          className='dropSign'
+                        className='dropSign'
                           src="/inv.png"
                           alt="col-icon"
                           height={30}
@@ -180,7 +274,7 @@ function CollectionsPage() {
                       <div className="rightContent">
                         <p>33</p>
                         <Image
-                          className='dropSign'
+                        className='dropSign'
                           src="/inv.png"
                           alt="col-icon"
                           height={30}
@@ -192,7 +286,7 @@ function CollectionsPage() {
                       <div className="rightContent">
                         <p>33</p>
                         <Image
-                          className='dropSign'
+                        className='dropSign'
                           src="/inv.png"
                           alt="col-icon"
                           height={30}
@@ -204,7 +298,7 @@ function CollectionsPage() {
                       <div className="rightContent">
                         <p>33</p>
                         <Image
-                          className='dropSign'
+                        className='dropSign'
                           src="/inv.png"
                           alt="col-icon"
                           height={30}
@@ -216,7 +310,7 @@ function CollectionsPage() {
                       <div className="rightContent">
                         <p>33</p>
                         <Image
-                          className='dropSign'
+                        className='dropSign'
                           src="/inv.png"
                           alt="col-icon"
                           height={30}
@@ -228,7 +322,7 @@ function CollectionsPage() {
                       <div className="rightContent">
                         <p>33</p>
                         <Image
-                          className='dropSign'
+                        className='dropSign'
                           src="/inv.png"
                           alt="col-icon"
                           height={30}
@@ -240,7 +334,7 @@ function CollectionsPage() {
                       <div className="rightContent">
                         <p>33</p>
                         <Image
-                          className='dropSign'
+                        className='dropSign'
                           src="/inv.png"
                           alt="col-icon"
                           height={30}
@@ -252,7 +346,7 @@ function CollectionsPage() {
                       <div className="rightContent">
                         <p>33</p>
                         <Image
-                          className='dropSign'
+                        className='dropSign'
                           src="/inv.png"
                           alt="col-icon"
                           height={30}
@@ -264,7 +358,7 @@ function CollectionsPage() {
                       <div className="rightContent">
                         <p>33</p>
                         <Image
-                          className='dropSign'
+                        className='dropSign'
                           src="/inv.png"
                           alt="col-icon"
                           height={30}
@@ -276,7 +370,7 @@ function CollectionsPage() {
                       <div className="rightContent">
                         <p>33</p>
                         <Image
-                          className='dropSign'
+                        className='dropSign'
                           src="/inv.png"
                           alt="col-icon"
                           height={30}
@@ -288,7 +382,7 @@ function CollectionsPage() {
                       <div className="rightContent">
                         <p>33</p>
                         <Image
-                          className='dropSign'
+                        className='dropSign'
                           src="/inv.png"
                           alt="col-icon"
                           height={30}
@@ -300,8 +394,8 @@ function CollectionsPage() {
                       <div className="rightContent">
                         <p>33</p>
                         <Image
-                          className='dropSign'
-                          src="/inv.png"
+                        className='dropSign'
+                          src="/inv.png" 
                           alt="col-icon"
                           height={30}
                           width={30}
@@ -312,7 +406,7 @@ function CollectionsPage() {
                       <div className="rightContent">
                         <p>33</p>
                         <Image
-                          className='dropSign'
+                        className='dropSign'
                           src="/inv.png"
                           alt="col-icon"
                           height={30}
