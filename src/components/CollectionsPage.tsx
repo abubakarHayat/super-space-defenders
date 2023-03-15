@@ -1,10 +1,19 @@
+import React, { useState } from 'react';
 import Image from "next/image";
 import Navbar from "./Navbar";
 import bg2 from "../../public/PFPs/ssd-pfp-03.jpg";
 import Tile from "./Tile";
 import bg from "../../public/space-bg-01.jpg";
+import { FaTimes } from 'react-icons/fa';
 
 function CollectionsPage() {
+  const style = { color: "white", fontSize: "4em" }
+
+  const [openMenu, setOpenMenu] = useState(false);
+ 
+  const handleToggleSideTab = () => {
+    setOpenMenu(!openMenu);
+  };
   return (
     <div
       className="h-full w-full"
@@ -99,7 +108,230 @@ function CollectionsPage() {
               />
             </div>
           </div>
-          <div className="collection-gallery"></div>
+          <div className="collection-gallery">
+
+            <div className="sideTab">
+              {openMenu && <>
+                <div className="sideTabContent">
+                  <div className="Tabcontent">
+                    <div className="content-item my-2">
+                      <h1 className='ttext-sm md:text-xl lg:text-2xl'>Background</h1>
+                      <div className="rightContent">
+                        <p>33</p>
+                        <Image
+                          className='dropSign'
+                          src="/inv.png"
+                          alt="col-icon"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div>
+                    <div className="content-item my-2">
+                      <h1 className='text-sm md:text-xl lg:text-2xl'>Background</h1>
+                      <div className="rightContent">
+                        <p>33</p>
+                        <Image
+                          className='dropSign'
+                          src="/inv.png"
+                          alt="col-icon"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div><div className="content-item my-2">
+                      <h1 className='text-sm md:text-xl lg:text-2xl'>Background</h1>
+                      <div className="rightContent">
+                        <p>33</p>
+                        <Image
+                          className='dropSign'
+                          src="/inv.png"
+                          alt="col-icon"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div><div className="content-item my-2">
+                      <h1 className='text-sm md:text-xl lg:text-2xl'>Background</h1>
+                      <div className="rightContent">
+                        <p>33</p>
+                        <Image
+                          className='dropSign'
+                          src="/inv.png"
+                          alt="col-icon"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div><div className="content-item my-2">
+                      <h1 className='text-sm md:text-xl lg:text-2xl'>Background</h1>
+                      <div className="rightContent">
+                        <p>33</p>
+                        <Image
+                          className='dropSign'
+                          src="/inv.png"
+                          alt="col-icon"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div><div className="content-item my-2">
+                      <h1 className='text-sm md:text-xl lg:text-2xl'>Background</h1>
+                      <div className="rightContent">
+                        <p>33</p>
+                        <Image
+                          className='dropSign'
+                          src="/inv.png"
+                          alt="col-icon"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div><div className="content-item">
+                      <h1 className='text-sm md:text-xl lg:text-2xl'>Background</h1>
+                      <div className="rightContent">
+                        <p>33</p>
+                        <Image
+                          className='dropSign'
+                          src="/inv.png"
+                          alt="col-icon"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div><div className="content-item my-2">
+                      <h1 className='text-sm md:text-xl lg:text-2xl'>Background</h1>
+                      <div className="rightContent">
+                        <p>33</p>
+                        <Image
+                          className='dropSign'
+                          src="/inv.png"
+                          alt="col-icon"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div><div className="content-item my-2">
+                      <h1 className='text-sm md:text-xl lg:text-2xl'>Background</h1>
+                      <div className="rightContent">
+                        <p>33</p>
+                        <Image
+                          className='dropSign'
+                          src="/inv.png"
+                          alt="col-icon"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div><div className="content-item my-2">
+                      <h1 className='text-sm md:text-xl lg:text-2xl'>Background</h1>
+                      <div className="rightContent">
+                        <p>33</p>
+                        <Image
+                          className='dropSign'
+                          src="/inv.png"
+                          alt="col-icon"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div><div className="content-item my-2">
+                      <h1 className='text-sm md:text-xl lg:text-2xl'>Background</h1>
+                      <div className="rightContent">
+                        <p>33</p>
+                        <Image
+                          className='dropSign'
+                          src="/inv.png"
+                          alt="col-icon"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div><div className="content-item my-2">
+                      <h1 className='text-sm md:text-xl lg:text-2xl'>Background</h1>
+                      <div className="rightContent">
+                        <p>33</p>
+                        <Image
+                          className='dropSign'
+                          src="/inv.png"
+                          alt="col-icon"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div><div className="content-item my-2">
+                      <h1 className='text-sm md:text-xl lg:text-2xl'>Background</h1>
+                      <div className="rightContent">
+                        <p>33</p>
+                        <Image
+                          className='dropSign'
+                          src="/inv.png"
+                          alt="col-icon"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div><div className="content-item my-2">
+                      <h1 className='text-sm md:text-xl lg:text-2xl'>Background</h1>
+                      <div className="rightContent">
+                        <p>33</p>
+                        <Image
+                          className='dropSign'
+                          src="/inv.png"
+                          alt="col-icon"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div><div className="content-item my-2">
+                      <h1 className='text-sm md:text-xl lg:text-2xl'>Background</h1>
+                      <div className="rightContent">
+                        <p>33</p>
+                        <Image
+                          className='dropSign'
+                          src="/inv.png"
+                          alt="col-icon"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div><div className="content-item my-2">
+                      <h1 className='text-sm md:text-xl lg:text-2xl'>Background</h1>
+                      <div className="rightContent">
+                        <p>33</p>
+                        <Image
+                          className='dropSign'
+                          src="/inv.png"
+                          alt="col-icon"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div><div className="content-item my-2">
+                      <h1 className='text-sm md:text-xl lg:text-2xl'>Background</h1>
+                      <div className="rightContent">
+                        <p>33</p>
+                        <Image
+                          className='dropSign'
+                          src="/inv.png"
+                          alt="col-icon"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="black"></div>
+              </>}
+              <button onClick={handleToggleSideTab} >
+
+                <div className="sideTabContent2">
+                  <h1 className="filter">Filter</h1>
+                </div>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
