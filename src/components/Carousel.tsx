@@ -28,6 +28,9 @@ function Carousel() {
                 in ipsam iusto veritatis praesentium ex necessitatibus enim
                 accusantium corrupti dolores! 3
               </p>
+              <button className="bg-red-500 w-44 btn-con-wallet h-10">
+              LEARN MORE
+            </button>
             </div>
             <div className="chars flex space-x-3 flex-wrap justify-center sm:justify-start sm:space-x-10">
               <Image

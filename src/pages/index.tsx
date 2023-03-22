@@ -3,6 +3,10 @@ import Carousel from "@/components/Carousel";
 import Collection from "@/components/Collection";
 import GalacticMap from "@/components/GalacticMap";
 import Archives from "@/components/Archives";
+import DefendersArcade from "@/components/DefendersArcade";
+import CollectionsPage from "@/components/CollectionsPage";
+import InteractiveLore from "@/components/InteractiveLore"
+import HolderProfile from "@/components/HolderProfile"
 export default function Home() {
   return (
     <>
@@ -14,9 +18,14 @@ export default function Home() {
       </Head>
 
       <Carousel />
-      <Collection />
+      <Collection/>
       <GalacticMap />
+
       <Archives />
+      <CollectionsPage />
+      <InteractiveLore /> 
+      <DefendersArcade/>
+      <HolderProfile/>
     </>
   );
 }

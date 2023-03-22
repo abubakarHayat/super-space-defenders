@@ -22,9 +22,11 @@ function GalacticMap() {
             Ratione?
           </p>
         </div>
-        <button className="bg-black text-white w-64 h-16 text-xl text-center">
-          EXPLORE HOLOMAP{" "}
-        </button>
+        <div className="cap-1 w-60 h-8 xl:h-10 mt-4 xl:w-60 bg-red-800 capsule flex items-center justify-center md:mt-0">
+          <button className=" text-white w-64 h-16 text-xl text-center">
+            EXPLORE HOLOMAP{" "}
+          </button>
+        </div>
       </div>
     </div>
   );
