@@ -4,8 +4,9 @@ import Navbar from "./Navbar";
 import bg2 from "../../public/PFPs/ssd-pfp-03.jpg";
 import Tile from "./Tile";
 import bg from "../../public/space-bg-01.jpg";
-import collectionPic from '../../public/pfp-gallery-hex.png';
+import collectionPic from '../../public/modalPic.png';
 import { FaTimes } from 'react-icons/fa';
+import collectionPicFrame from '../../public/pfp-gallery-hex-boundary.png';
 
 function CollectionsPage() {
   const style = { color: "white", fontSize: "4em" }
@@ -225,7 +226,11 @@ function CollectionsPage() {
           return (
             <div className="tile" key={i} onClick={handleClick}> 
               <div className="hexagon">
-                <img src={collectionPic.src}  className="CollectionPageImg"/>
+                <img src={collectionPic.src}  alt="" className="CollectionPageImg"/>
+                <div>
+                <img src={collectionPicFrame.src}  alt="" className="CollectionPageImgFrame"/>
+                </div>
+                <p className='CollectionPageNumber lg:text-lg xl:text-3xl 2xl:mt-2'>#1234</p>
               </div>
             </div>
           );

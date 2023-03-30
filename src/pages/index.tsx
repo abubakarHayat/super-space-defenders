@@ -20,12 +20,12 @@ export default function Home() {
       <Carousel />
       <Collection/>
       <GalacticMap />
-
       <Archives />
-      <CollectionsPage />
+
       <InteractiveLore /> 
       <DefendersArcade/>
       <HolderProfile/>
+      <CollectionsPage />
     </>
   );
 }

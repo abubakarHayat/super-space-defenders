@@ -190,56 +190,60 @@ body {
 
 /* ----------HEX---------------------------*/
 
-.CollectionPg{
+.CollectionPg {
   position: relative;
   display: flex;
   justify-content: center;
 }
-.CollectionPageImg {
+
+.CollectionPageImgFrame {
   position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: max-content;
-    z-index: 0;
-    height: 116%;
-    transform: rotate(209deg);
-    margin-top: -10%;
-    margin-left: 1%;
-  /* position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  width: 135%;
-  z-index: 15;
-  height: 123%;
+  width: max-content;
+  z-index: 0;
+  height: 116%;
   transform: rotate(209deg);
   margin-top: -10%;
-  margin-left: -6%; */
-  /* position: absolute;
-top: 0;
-right: 0;
-bottom: 0;
-left: 0;
-width: 111%;
-z-index: 15;
-height: 122%;
-transform: rotate(209deg);
-margin-top: -9%;
-margin-left: -5%; */
+  margin-left: 1%;
+ 
 }
 
+.CollectionPageImg {
+  position: absolute;
+  top: 14%;
+  left: 8%;
+  width: -moz-max-content;
+  width: 80%;
+  z-index: 0;
+  height: 95%;
+  transform: rotate(209deg);
+  margin-top: -10%;
+  margin-left: 1%;
+  border-radius: 36%;
+
+}
+
+.CollectionPageNumber {
+  position: absolute;
+  top: -6%;
+  left: 23%;
+  font-size: small;
+  width: -moz-fit-content;
+  width: 100%;
+  rotate: none;
+  transform: rotate(209deg);
+  color: #aeaeae;
+}
 
 .HexagonCollectionGallery {
-  margin-top: 100px;
-  transform: rotate(0.5deg);
-  height: 78vh;
+  height: 57%;
   overflow-y: auto;
   overflow-x: hidden;
   position: absolute;
-  top: 30%;
+  top: 42%;
 }
 
 .hexagon {
@@ -277,7 +281,7 @@ margin-left: -5%; */
   margin-left: 13%;
   width: fit-content;
   transform: rotate(150deg);
-  margin-top: 100px;
+  margin-top: 10px;
 }
 
 .tile:nth-child(4) {
@@ -296,78 +300,112 @@ margin-left: -5%; */
 
 @media (max-width: 900px) and (min-width:851px) {
   .tile:nth-child(5n-1) {
-      margin-left: 28.7%;
+    margin-left: 28.7%;
   }
 }
+
 
 @media (max-width: 850px) {
 
   .hexagon,
   .hexagon::before,
   .hexagon::after {
-      width: 13vmax;
-      height: 10vmax;
-      border-radius: 56%/22%;
+    width: 13vmax;
+    height: 10vmax;
+    border-radius: 56%/22%;
   }
 
   .HexagonCollectionGallery {
-      width: 45vmax;
-      top: 30%;
-      padding-top: 7%;
-      height: 82vh;
+    width: 45vmax;
+    top: 40%;
+    padding-top: 5%;
+    height: 82vh;
   }
 
   .tile {
-      margin-left: 10%;
+    margin-left: 10%;
   }
 
   .tile:nth-child(n) {
-      margin-top: 0%;
-      margin-left: 0%;
+    margin-top: 0%;
+    margin-left: 0%;
   }
 
   .tile:nth-child(3n-1) {
-      /* margin-left: 10%; */
-      width: 56%;
-      border: 2px solid transparent;
+    width: 56%;
+    border: 2px solid transparent;
 
   }
 
   .tile:nth-child(3n-2) {
-      width: 40%;
-      /* margin-left: 30%; */
-      border: 2px solid transparent;
+    width: 40%;
+    border: 2px solid transparent;
   }
 
   .tile:nth-child(3n) {
-      margin-left: 19.2%;
-      width: 50%;
-      margin-top: -7%;
-      border: 2px solid transparent;
+    margin-left: 19.2%;
+    width: 50%;
+    margin-top: -7%;
+    border: 2px solid transparent;
   }
 
   .tile:nth-child(n+4) {
-      margin-top: -4vmax;
+    margin-top: -4vmax;
   }
 
-  /* .tile:nth-child(1) {
-   margin-top: 5%;
-} */
+
+
+
+  .CollectionPageImgFrame {
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 114%;
+    z-index: 15;
+    height: 128%;
+    transform: rotate(209deg);
+    margin-top: -11%;
+    margin-left: -8%;
+  }
+
   .CollectionPageImg {
+    position: absolute;
+    top: 12%;
+    left: -2%;
+    width: 82%;
+    z-index: 0;
+    height: 107%;
+    transform: rotate(209deg);
+    margin-top: -10%;
+    margin-left: 1%;
+    border-radius: 39%;
 
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      width: 114%;
-      z-index: 15;
-      height: 128%;
-      transform: rotate(209deg);
-      margin-top: -11%;
-      margin-left: -8%;
   }
 
+  .CollectionPageNumber {
+    position: absolute;
+    top: -7%;
+    left: 12%;
+    font-size: x-small;
+    width: -moz-fit-content;
+    width: 100%;
+    rotate: none;
+    transform: rotate(209deg);
+    color: #aeaeae;
+    z-index: 15;
+  }
+
+
+}
+
+@media (max-width: 480px) {
+  .HexagonCollectionGallery {
+    top: 42%;
+    padding-top: 11%;
+  }
 }
 
 /* Adding the side tab of collections page css */
@@ -1024,6 +1062,6 @@ h1 {
 }
 
 
-.fix-img{
+.fix-img {
   height: 500vh;
 }
