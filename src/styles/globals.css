@@ -450,10 +450,10 @@ h1 {
   }
 }
 @media (max-width:700px) {
-
+   
   .closet-item {
     width: 97%;
-    margin: 2.5px 0px 2.5px 0px;
+    margin: 2.8px 0px 2.8px 0px;
     padding-left: 5px;
   }
   .Image {

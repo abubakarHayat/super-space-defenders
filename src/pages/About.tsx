@@ -1,6 +1,7 @@
 import React from 'react'
 import bg from "../../public/space-bg-01.jpg"
 import Image from "next/image";
+import Navbar from '@/components/Navbar';
 
 function About() {
     return (
@@ -9,7 +10,7 @@ function About() {
             style={{
                 background: `url(${bg.src})`
             }}>
-
+            <Navbar/>
             <div className='w-5/6 m-auto flex '>
                 <div className='w-full flex justify-center items-center'>
                     <Image

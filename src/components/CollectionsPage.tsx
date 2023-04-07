@@ -39,7 +39,7 @@ function CollectionsPage() {
                 return (
                   <div className="content-item my-2" key={i}>
                     <h1 className='text-sm md:text-xl lg:text-2xl text-white'>Background</h1>
-                    <div className="rightContent">
+                    <div className="rightContent flex w-[56px] ">
                       <p className='text-white'>33</p>
                       <Image
                         src="/inv.png"
@@ -221,7 +221,16 @@ function CollectionsPage() {
                         </div>
 
                       </div>
-                      <div className="closet-Items scroll-bar  overflow-y-auto overflow-x-hidden h-[45%] w-full flex flex-wrap items-center justify-start md:relative">
+                      <div className='w-full flex justify-center -mt-[9%] mb-[2%] sm:-mt-[5%] sm:mb-[3%] lg:-mt-[4%] xl:-mt-[3%] 2xl:-mt-[1%]'>
+                      <Image
+                        className="w-[98%] h-[10px]"
+                        src="/gallery-pfp-details-bar-01 1.png"
+                        alt="col-icon"
+                        height={1000}
+                        width={1000}
+                      />
+                      </div>
+                      <div className="closet-Items scroll-bar  overflow-y-auto overflow-x-hidden h-[45%] w-full flex flex-wrap items-center justify-start md:relative ">
                         {[...Array(10)].map((_, i) => {
                           return (
                             <div className="closet-item " key={i}>
@@ -232,7 +241,7 @@ function CollectionsPage() {
                                 height={100}
                                 width={100}
                               />
-                              <div className="closet-item-content flex flex-col w-full h-full justify-center pl-3 xl:pl-0 absolute top-0 left-3 xl:left-7 2xl:left-8">
+                              <div className="closet-item-content flex flex-col w-full h-full justify-center pl-1 md:pl-3 xl:pl-0 absolute top-0 left-3 xl:left-7 2xl:left-8">
                                 <h1 className="text-sm py-0 my-0 leading-4 font-bugfast">BACKGROUND</h1>
                                 <p className="text-sm font-thin py-0 my-0 leading-4">Dark Matter</p>
                               </div>
@@ -241,11 +250,11 @@ function CollectionsPage() {
                         })}
 
                       </div>
-                      <div className="h-[30%] w-full flex justify-center items-start flex-col relative overflow-hidden">
+                      <div className="h-[30%] w-[99%] flex justify-center items-start flex-col relative overflow-hidden">
                         <Image
                           src="/Vector 5.png"
                           alt=''
-                          className='h-full w-full'
+                          className='h-full w-[99%]'
                           height={1000}
                           width={1000}
                         />
@@ -276,7 +285,9 @@ function CollectionsPage() {
         {[...Array(90)].map((_, i) => {
           return (
             <div className="tile inline-block ml-[13%] w-fit mt-[10px] rotate-[150deg]" key={i} onClick={handleClick}>
-              <div className="hexagon relative inline-block text-center before:w-[17vmax] after:w-[17vmax] w-[17vmax] before:h-[14vmax] after:h-[14vmax] h-[14vmax] before:bg-inherit before:absolute before:left-0 before:content-none  before:h-[14vmax] after:h-[14vmax] h-[14vmax] after:bg-inherit after:absolute after:left-0 after:content-none after:rotate-[60deg] before:rotate-[60deg]">
+              <div className="hexagon relative inline-block text-center before:w-[17vmax] after:w-[17vmax] w-[17vmax] before:bg-inherit 
+                              before:absolute before:left-0 before:content-none  before:h-[14vmax] after:h-[14vmax] h-[14vmax] 
+                              after:bg-inherit after:absolute after:left-0 after:content-none after:rotate-[60deg] before:rotate-[60deg]">
                 <img src={collectionPic.src} alt="" className="collection-page-img" />
                 <div>
                   <img src={collectionPicFrame.src} alt="" className="absolute top-0 right-0 bottom-0 left-0 w-[114%] z-20 h-[128%] -mt-[11%] -ml-[8%] md:w-max md:z-0 md:h-[116%] rotate-[209deg] md:-mt-[10%] md:ml-[1%]" />
