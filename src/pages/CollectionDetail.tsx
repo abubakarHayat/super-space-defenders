@@ -23,7 +23,7 @@ function CollectionDetail() {
               width={500}
             />
           </div>
-          <div className='md:w-4/6 lg:2/4 bg-black bg-opacity-70 h-full overflow-y-scroll  scrollBar  '>
+          <div className='md:w-4/6 lg:2/4 bg-black bg-opacity-70 h-full overflow-y-scroll  scroll-bar  '>
             <h1 className='font-bugfast text-2xl  sm:text-2xl xl:text-4xl 2xl:text-5xl  3xl:text-12xl text-white mt-2 mb-2  '>SUPER SPACE DEFENDERS</h1>
             <Image
               className='w-5/5'

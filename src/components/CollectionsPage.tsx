@@ -20,7 +20,58 @@ function CollectionsPage() {
     setOpenMenu(!openMenu);
   };
   return (
-    <div className='CollectionPg'>
+    <div className='collection-pg'>
+      <div className={`h-2/3 md:h-4/5 w-fit left-0 fixed top-[17%] md:top-[13%] z-20`}>
+        {openMenu && <>
+          <div className="h-full w-full relative">
+            <Image
+              src="/Filter Bar Shape.png"
+              alt=''
+              className='w-full h-full '
+              height={1000}
+              width={1000}
+            />
+            <button onClick={handleToggleSideTab} className="absolute top-[43%] right-0  w-[40px] h-[89px]  lg:top-[43.2%] lg:h-[105px]" >
+             <h1 className="absolute top-[50%] right-0 rotate-90 -mt-[18px] md:-mt-[14px] text-lg md:text-2xl -mr-[9px]">Filter</h1>
+            </button>
+            <div className=" w-[83%] h-[91%] scroll-bar absolute top-7 overflow-auto  pl-3">
+              {[...Array(1005)].map((_, i) => {
+                return (
+                  <div className="content-item my-2" key={i}>
+                    <h1 className='text-sm md:text-xl lg:text-2xl text-white'>Background</h1>
+                    <div className="rightContent">
+                      <p className='text-white'>33</p>
+                      <Image
+                        src="/inv.png"
+                        className=''
+                        alt="col-icon"
+                        height={20}
+                        width={25}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+
+            </div>
+          </div>
+        </>}
+        { !openMenu && 
+         <div className="h-full w-full relative -left-[89%]">
+         <Image
+           src="/Filter Bar Shape.png"
+           alt=''
+           className='w-full h-full '
+           height={1000}
+           width={1000}
+         />
+         <button onClick={handleToggleSideTab} className="absolute top-[43%] right-0  w-[40px] h-[89px]  lg:top-[43.2%] lg:h-[105px]" >
+          <h1 className="absolute top-[50%] right-0 rotate-90 -mt-[18px] md:-mt-[14px] text-lg md:text-2xl -mr-[9px]">Filter</h1>
+         </button>
+        
+       </div>}
+
+      </div>
       <div
         className="h-fit w-full"
         style={{
@@ -35,16 +86,8 @@ function CollectionsPage() {
           <h1 className="font-bugfast xl:text-6xl text-white">
             COLLECTIONS GALLERY
           </h1>
-          {/*
-         <div className="gallery-wrapper bg-white h-60v w-50v">
-          <div className="gallery bg-zinc-300"></div>
-        </div> */}
-          {/* <div className="wrapper h-60v w-90v">
-          <div className="char-ip h-10 w-20 border-white border-2">
-            <input className="border-emerald-200 border-2 h-full w-full" />
-          </div>
-        </div> */}
-          <div className="gallery h-80v w-11/12 lg:w-90v border-white border-2 my-2 flex flex-col items-center">
+
+          <div className="gallery h-80v w-11/12 lg:w-90v  my-2 flex flex-col items-center">
             <div className="sub-nav px-3 md:px-10 m-10 w-full text-white grid grid-cols-3 gap-5">
               <div className="input-container w-full mr-10 col-span-3 xl:col-span-1 relative">
                 <svg
@@ -115,25 +158,41 @@ function CollectionsPage() {
                 />
               </div>
             </div>
+
             <div className="collection-gallery overflow-auto">
               {openModal && <>
-                <div className="modal">
-                  <div className='crossBtn flex justify-center items-center'>
-                    <FaTimes style={style} onClick={() => setOpenModal(false)} />
-                  </div>
-                  <div className="modal-content">
-                    <div className="leftSide">
+                <div className="flex w-full h-full justify-center z-30">
+                  <Image
+                    src="/Vector 7.png "
+                    alt=''
+                    className='w-[72%] h-[72%] fixed top-[140px] ml-5 bg-black opacity-90 sm:rounded-tl-sm sm:rounded-br-sm rounded-bl-[30px] rounded-tr-[30px] sm:rounded-tr-[39px] md:rounded-tr-[45px] lg:rounded-tr-[57px] xl:rounded-tr-[68px] 2xl:rounded-tr-[84px]   z-20    sm:rounded-bl-[39px] md:rounded-bl-[45px] lg:rounded-bl-[57px] xl:rounded-bl-[68px] 2xl:rounded-bl-[84px]'
+                    height={1000}
+                    width={1000}
+                  />
+
+
+                  <div className="modal-content flex justify-center overflow-hidden h-[70%] w-4/5 fixed top-[150px] m-auto ml-[20px] z-20 ">
+                    <div className="leftSide mr-4 w-[40%] h-full flex justify-center items-center relative">
                       <Image
-                        className="modalImg"
+                        className="modal-img h-[96%] w-[97%] ml-[10px]"
                         src="/modalPic.png"
                         alt="col-icon"
                         height={100}
                         width={100}
                       />
+                     <Image
+                        className="absolute bottom-5 right-2 "
+                        src="/opensea-logo-white-01 1.png"
+                        alt="col-icon"
+                        height={40}
+                        width={40}
+                      />
                     </div>
-                    <div className="rightSide">
-                      <div className="ProfieInfo">
-                        <div className="ProfieInfo-picture">
+                    <div className="rightSide w-[48%] h-full flex flex-col justify-center items-start relative">
+                      <h1 className='absolute top-6 right-[0.51rem] lg:right-[0.50rem] xl:right-[0.60rem] text-xl lg:text-2xl font-bold rotate-[72deg] lg:rotate-[70deg] xl:rotate-[58deg] 2xl:rotate[61deg] 2xl:right-[0.75rem] md:right-[0.70rem] md:top-8 font-bugfast' onClick={() => setOpenModal(false)} >Close</h1>
+
+                      <div className="profie-info ">
+                        <div className="profie-info-picture">
                           <div className="logo">
                             <Image
                               className="Profie-picture"
@@ -144,11 +203,11 @@ function CollectionsPage() {
                             />
                           </div>
                         </div>
-                        <div className="ProfieInfo-content flex flex-col justify-center overflow-hidden">
-                          <h1 className="text-xs sm:text-sm w-fit md:text-sm lg:text-lg xl:text-xl 2xl:text-2xl">SPACE DEFENDER NO. 1234</h1>
-                          <div className="ProfieInfo-Inner-content"> <h1 className="text-xs sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">NO. </h1>  <p className="text-xs leading-5 font-light w-fit sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl"> 1234 |  &zwnj; </p> <h1 className="text-xs sm:text-sm   md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">OWNER:</h1> <p className="text-xs leading-5 font-light sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">VerbalTachi</p></div>
+                        <div className="profie-info-content flex flex-col justify-center overflow-hidden">
+                          <h1 className="text-xs sm:text-sm w-fit md:text-sm lg:text-lg xl:text-xl 2xl:text-2xl font-bugfast">SPACE DEFENDER NO. 1234</h1>
+                          <div className="profie-info-Inner-content"> <h1 className="text-xs sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bugfast">NO. </h1>  <p className="text-xs leading-5 font-light w-fit sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl"> 1234 |  &zwnj; </p> <h1 className="text-xs sm:text-sm   md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bugfast">OWNER:</h1> <p className="text-xs leading-5 font-light sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">VerbalTachi</p></div>
                         </div>
-                        <div className="ProfieInfo-picture profile">
+                        <div className="profie-info-picture profile">
                           <div className="Image">
                             <Image
                               className="Profie-picture"
@@ -162,12 +221,19 @@ function CollectionsPage() {
                         </div>
 
                       </div>
-                      <div className="ClosetItems scrollBar">
+                      <div className="closet-Items scroll-bar  overflow-y-auto overflow-x-hidden h-[45%] w-full flex flex-wrap items-center justify-start md:relative">
                         {[...Array(10)].map((_, i) => {
                           return (
-                            <div className="closet-item" key={i}>
-                              <div className="closet-item-content flex flex-col w-full h-full justify-center pl-3 xl:pl-0">
-                                <h1 className="text-sm py-0 my-0 leading-4">BACKGROUND</h1>
+                            <div className="closet-item " key={i}>
+                              <Image
+                                src="/Vector 4.png"
+                                alt=''
+                                className='h-full w-full'
+                                height={100}
+                                width={100}
+                              />
+                              <div className="closet-item-content flex flex-col w-full h-full justify-center pl-3 xl:pl-0 absolute top-0 left-3 xl:left-7 2xl:left-8">
+                                <h1 className="text-sm py-0 my-0 leading-4 font-bugfast">BACKGROUND</h1>
                                 <p className="text-sm font-thin py-0 my-0 leading-4">Dark Matter</p>
                               </div>
                             </div>
@@ -175,67 +241,54 @@ function CollectionsPage() {
                         })}
 
                       </div>
-                      <div className="BackStory">
-                        <h1 className="BackStory-head">BackStory</h1>
-                        <p className="BackStory-content">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla veniam fugit ex beatae officiis ad ratione eligendi atque. Consectetur quia accusamus provident rem sunt maiores quaerat odit inventore natus culpa.</p>
+                      <div className="h-[30%] w-full flex justify-center items-start flex-col relative overflow-hidden">
+                        <Image
+                          src="/Vector 5.png"
+                          alt=''
+                          className='h-full w-full'
+                          height={1000}
+                          width={1000}
+                        />
+                        <div className='absolute top-4'>
+                          <h1 className="h-1/5 ml-[2%] font-bugfast">BackStory</h1>
+                          <p className="mt-2 h-[60%] ml-[2%] text-sm">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                            Nulla veniam fugit ex beatae officiis ad ratione eligendi atque. Consectetur quia
+                            accusamus provident rem sun
+                            t maiores quaerat odit inventore natus culpa Lorem
+                            ipsum dolor sit amet consectetur adipisicing elit.
+                            Asperiores alias aliquam dolores voluptates minus. Commodi tenetur,
+                            ipsa odit esse explicabo placeat modi nisi accusamus! At esse officia,
+                            illo, quam est numquam molestiae unde qui pariatur blanditiis ut, incidunt assumenda ab..</p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </>
               }
-              <div className="sideTab z-10">
-                {openMenu && <>
-                  <div className="sideTabContent">
-                    <div className="Tabcontent">
-                      {[...Array(17)].map((_, i) => {
-                        return (
-                          <div className="content-item my-2" key={i}>
-                            <h1 className='ttext-sm md:text-xl lg:text-2xl'>Background</h1>
-                            <div className="rightContent">
-                              <p>33</p>
-                              <Image
-                                className='dropSign'
-                                src="/inv.png"
-                                alt="col-icon"
-                                height={30}
-                                width={30}
-                              />
-                            </div>
-                          </div>
-                        );
-                      })}
 
-                    </div>
-                  </div>
-                  <div className="black"></div>
-                </>}
-                <button onClick={handleToggleSideTab} >
-
-                  <div className="sideTabContent2">
-                    <h1 className="filter">Filter</h1>
-                  </div>
-                </button>
-              </div>
             </div>
           </div>
+
         </div>
       </div>
-      <div className='HexagonCollectionGallery scrollBar'>
+      <div className='hexagon-collection-gallery scroll-bar h-[57%] overflow-y-auto overflow-x-hidden absolute top-[42%]'>
         {[...Array(90)].map((_, i) => {
           return (
-            <div className="tile" key={i} onClick={handleClick}> 
-              <div className="hexagon">
-                <img src={collectionPic.src}  alt="" className="CollectionPageImg"/>
+            <div className="tile inline-block ml-[13%] w-fit mt-[10px] rotate-[150deg]" key={i} onClick={handleClick}>
+              <div className="hexagon relative inline-block text-center before:w-[17vmax] after:w-[17vmax] w-[17vmax] before:h-[14vmax] after:h-[14vmax] h-[14vmax] before:bg-inherit before:absolute before:left-0 before:content-none  before:h-[14vmax] after:h-[14vmax] h-[14vmax] after:bg-inherit after:absolute after:left-0 after:content-none after:rotate-[60deg] before:rotate-[60deg]">
+                <img src={collectionPic.src} alt="" className="collection-page-img" />
                 <div>
-                <img src={collectionPicFrame.src}  alt="" className="CollectionPageImgFrame"/>
+                  <img src={collectionPicFrame.src} alt="" className="absolute top-0 right-0 bottom-0 left-0 w-[114%] z-20 h-[128%] -mt-[11%] -ml-[8%] md:w-max md:z-0 md:h-[116%] rotate-[209deg] md:-mt-[10%] md:ml-[1%]" />
                 </div>
-                <p className='CollectionPageNumber lg:text-lg xl:text-3xl 2xl:mt-2'>#1234</p>
+                <p className='collection-page-number lg:text-lg xl:text-3xl 2xl:mt-2'>#1234</p>
               </div>
             </div>
           );
         })}
       </div>
+
+
 
     </div>
   );

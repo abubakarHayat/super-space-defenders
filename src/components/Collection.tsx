@@ -9,7 +9,7 @@ const COLLECTION_ICONS: { src: string }[] = [
 ];
 export default function Collection() {
     return (
-        <div className="collection bg-fixed bg-contain overflow-auto  bg-f flex flex-col scrollBar">
+        <div className="collection bg-fixed bg-contain overflow-auto  bg-f flex flex-col scroll-bar">
             <div>
                 <div className="h-40"></div>
                 <div className="flex justify-evenly">

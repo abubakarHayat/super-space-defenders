@@ -1,9 +1,6 @@
 import Navbar from '@/components/Navbar'
 import Image from "next/image";
 import React from 'react'
-import holder from '../../../public/holder-profile-main-pfp.png'
-import TopSectionDiv from "../../../public/Vector 8.png";
-import Divider from '../../../public/page-title-bar-01 2.png'
 
 function Inventory() {
   return (
@@ -13,14 +10,14 @@ function Inventory() {
 
       <div className='h-1/4 flex justify-center m-auto mt-10 items-end w-5/6 relative overflow-hidden lg:h-1/3 xl:h-2/5 -mt-9 '>
         <Image
-          src={holder}
+          src="/holder-profile-main-pfp.png"
           className='w-auto h-3/4'
           alt="col-icon"
           height={100}
           width={100}
         />
         <Image
-          src={TopSectionDiv.src}
+          src="/Vector 8.png"
           alt=""
           className='w-7/12 h-3/4 sm:w-3/4 md:w-full'
           height={100}
@@ -37,7 +34,7 @@ function Inventory() {
                 </div>
 
                 <Image
-                  src={Divider.src}
+                  src="/page-title-bar-01 2.png"
                   alt=""
                   height={1000}
                   width={1000}
@@ -122,34 +119,42 @@ function Inventory() {
               width={500}
             />
 
-            <div className="flex justify-center w-full h-full absolute top-0">
-
-              <div className="leftSide">
+            <div className="flex justify-center w-full h-full absolute top-0 ">
+              <div className="leftSide  w-[46%] h-full flex justify-center items-center relative">
                 <Image
-                  className="modalImg"
-                  src="/modalPic.png"
+                  className="modal-img h-[96%] w-[95%] ml-[2px]"
+                  src="/gallery-pfp-details-image-01 1.png"
                   alt="col-icon"
                   height={100}
                   width={100}
                 />
+                <Image
+                        className="absolute bottom-5 right-2 md:right-3 lg:right-6  "
+                        src="/opensea-logo-white-01 1.png"
+                        alt="col-icon"
+                        height={40}
+                        width={40}
+                      />
               </div>
-              <div className="rightSide">
-                <div className="ProfieInfo">
-                  <div className="ProfieInfo-picture">
+              <div className="rightSide w-[54%] h-full flex flex-col justify-center items-start relative">
+
+                <div className="profie-info ">
+                  <div className="profie-info-picture">
                     <div className="logo">
-                    <Image
-                  src="/faction-icon-01 2.png"
-                  alt="home-icon-02"
-                  height={30}
-                  width={50}
-                />
+                      <Image
+                        className="Profie-picture"
+                        src="/logo.png"
+                        alt="col-icon"
+                        height={100}
+                        width={100}
+                      />
                     </div>
                   </div>
-                  <div className="ProfieInfo-content flex flex-col justify-center overflow-hidden">
-                    <h1 className="text-xs sm:text-sm w-fit md:text-sm lg:text-lg xl:text-xl 2xl:text-2xl font-bugfast ">SPACE DEFENDER NO. 1234</h1>
-                    <div className="ProfieInfo-Inner-content"> <h1 className="text-xs sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bugfast ">NO. </h1>  <p className="text-xs leading-5 font-light w-fit sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl"> 1234 |  &zwnj; </p> <h1 className="text-xs sm:text-sm   md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bugfast ">OWNER:</h1> <p className="text-xs leading-5 font-light sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">VerbalTachi</p></div>
+                  <div className="profie-info-content flex flex-col justify-center overflow-hidden">
+                    <h1 className="text-xs sm:text-sm w-fit md:text-sm lg:text-lg xl:text-xl 2xl:text-2xl font-bugfast">SPACE DEFENDER NO. 1234</h1>
+                    <div className="profie-info-Inner-content"> <h1 className="text-xs sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bugfast">NO. </h1>  <p className="text-xs leading-5 font-light w-fit sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl"> 1234 |  &zwnj; </p> <h1 className="text-xs sm:text-sm   md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bugfast">OWNER:</h1> <p className="text-xs leading-5 font-light sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">VerbalTachi</p></div>
                   </div>
-                  <div className="ProfieInfo-picture profile">
+                  <div className="profie-info-picture profile">
                     <div className="Image">
                       <Image
                         className="Profie-picture"
@@ -163,27 +168,51 @@ function Inventory() {
                   </div>
 
                 </div>
-                <div className="ClosetItems scrollBar">
+                <div className="closet-Items scroll-bar  overflow-y-auto overflow-x-hidden h-[45%] w-full flex flex-wrap items-center justify-start relative">
                   {[...Array(10)].map((_, i) => {
                     return (
-                      <div className="closet-item " key={i}>
-                        <div className="closet-item-content flex flex-col w-full h-full justify-center pl-3 xl:pl-0">
-                          <h1 className="text-xs py-0 my-0 leading-4 font-bugfast ">BACKGROUND</h1>
-                          <p className="text-xs font-thin py-0 my-0 leading-4">Dark Matter</p>
+                      <div className="closet-item" key={i}>
+                        <Image
+                          src="/Vector 4.png"
+                          alt=''
+                          className='h-full w-full'
+                          height={100}
+                          width={100}
+                        />
+                        <div className="closet-item-content flex flex-col w-full h-full justify-center pl-3 xl:pl-0 absolute top-0 left-3 xl:left-7 2xl:left-8">
+                          <h1 className="text-sm py-0 my-0 leading-4 font-bugfast">BACKGROUND</h1>
+                          <p className="text-sm font-thin py-0 my-0 leading-4">Dark Matter</p>
                         </div>
                       </div>
                     );
                   })}
 
                 </div>
-                <div className="BackStory">
-                  <h1 className="BackStory-head font-bugfast ">BackStory</h1>
-                  <p className="BackStory-content">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla veniam fugit ex beatae officiis ad ratione eligendi atque. Consectetur quia accusamus provident rem sunt maiores quaerat odit inventore natus culpa.</p>
+                <div className="h-[30%] w-full flex justify-center items-start flex-col relative overflow-hidden">
+                  <Image
+                    src="/Vector 5.png"
+                    alt=''
+                    className='h-full w-[98%]'
+                    height={1000}
+                    width={1000}
+                  />
+                  <div className='absolute top-4 w-[98%]'>
+                    <h1 className="h-1/5 ml-[2%] font-bugfast ">BackStory</h1>
+                    <p className="mt-2 h-[60%] ml-[2%] text-sm w-[98%]">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Nulla veniam fugit ex beatae officiis ad ratione eligendi atque. Consectetur quia
+                      accusamus provident rem sun
+                      t maiores quaerat odit inventore natus culpa Lorem
+                      ipsum dolor sit amet consectetur adipisicing elit.
+                      Asperiores alias aliquam dolores voluptates minus. Commodi tenetur,
+                      ipsa odit esse explicabo placeat modi nisi accusamus! At esse officia,
+                      illo, quam est numquam molestiae unde qui pariatur blanditiis ut, incidunt assumenda ab..</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
 
 

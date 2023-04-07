@@ -21,7 +21,7 @@ function About() {
                     />
                 </div>
                 <div className='w-full flex justify-center flex-col '>
-                    <div className='overflow-y-auto w-4/5  h-28 sm:h-4/5 scrollBar'>
+                    <div className='overflow-y-auto w-4/5  h-28 sm:h-4/5 scroll-bar'>
                         <h1 className='font-bugfast sm:text-lg xl:text-6xl text-white'>Soldiers <br /> Rise  <br /> Togather</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pellentesque efficitur quam vel mattis.
                             Nulla placerat, justo sed tempor pellentesque, nulla quam porttitor magna, vitae egestas purus leo id elit. Fusce ut massa gravida,
