@@ -20,8 +20,8 @@ function Inventory() {
           src="/Vector 8.png"
           alt=""
           className='w-7/12 h-3/4 sm:w-3/4 md:w-full'
-          height={100}
-          width={100}
+          height={1000}
+          width={1000}
         />
         <div className='absolute  w-8/12 h-3/4 right-0 lg:w-4/6 xl:w-8/12 flex items-end justify-end  md:mr-0'>
           <div className='w-10/12  h-full flex flex-col justify-center md:w-11/12 items-start' >
@@ -176,8 +176,8 @@ function Inventory() {
                           src="/Vector 4.png"
                           alt=''
                           className='h-full w-full'
-                          height={100}
-                          width={100}
+                          height={1000}
+                          width={1000}
                         />
                         <div className="closet-item-content flex flex-col w-full h-full justify-center pl-3 xl:pl-0 absolute top-0 left-3 xl:left-7 2xl:left-8">
                           <h1 className="text-sm py-0 my-0 leading-4 font-bugfast">BACKGROUND</h1>

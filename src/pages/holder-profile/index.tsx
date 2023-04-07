@@ -12,40 +12,40 @@ function index() {
   return (
     <div className='bg-black h-screen w-full overflow-x-hidden pb-9' >
       <Navbar />
-      <div className='h-2/4 flex-col sm:flex-row sm:h-1/4 flex justify-center m-auto mt-10 items-center sm:items-end w-full sm:w-5/6 relative  lg:h-1/3 xl:h-2/5 sm:-mt-9'>
+      <div className='h-1/4 flex justify-center m-auto mt-10 items-end w-5/6 relative overflow-hidden lg:h-1/3 xl:h-2/5 -mt-9 '>
         <Image
-          src={holder}
+          src="/holder-profile-main-pfp.png"
           className='w-auto h-3/4'
           alt="col-icon"
           height={100}
           width={100}
         />
         <Image
-          src={TopSectionDiv.src}
+          src="/Vector 8.png"
           alt=""
-          className=' w-[90%] sm:w-9/12 h-3/4 sm:w-3/4 md:w-full mt-2 sm:mt-0'
-          height={100}
-          width={100}
+          className='w-7/12 h-3/4 sm:w-3/4 md:w-full'
+          height={1000}
+          width={1000}
         />
-        <div className='absolute  w-[90%] bottom-0 h-2/4 sm:w-8/12 sm:h-3/4 sm:right-0 lg:w-4/6 xl:w-8/12 flex items-end justify-end  md:mr-0 '>
+        <div className='absolute  w-8/12 h-3/4 right-0 lg:w-4/6 xl:w-8/12 flex items-end justify-end  md:mr-0'>
           <div className='w-10/12  h-full flex flex-col justify-center md:w-11/12 items-start' >
             <div className='h-5/6 w-11/12 flex flex-col justify-between'>
               <div>
 
                 <div className='flex justify-between items-end'>
-                  <h1 className='font-bugfast text-3xl xl:text-4xl '>SCYE ANURIAN</h1>
-                  <h3 className='font-bugfast text-sm text-white' >LVL 24</h3>
+                  <h1 className='font-bugfast text-3xl xl:text-4xl min-w-max'>SCYE ANURIAN</h1>
+                  <h3 className='font-bugfast text-sm text-white min-w-max' >LVL 24</h3>
                 </div>
 
                 <Image
-                  src={Divider.src}
+                  src="/page-title-bar-01 2.png"
                   alt=""
                   height={1000}
                   width={1000}
                 />
 
                 <div className='flex justify-between'>
-                  <p>MASTER PILOT</p>
+                  <p className='min-w-max'>MASTER PILOT</p>
                   <p>0xc42...20cE2</p>
                 </div>
 
@@ -93,6 +93,8 @@ function index() {
             <div className='h-1/5 w-full bg-white mb-2 sm:w-10/12 md:w-3/4 lg:w-8/12 xl:w-3/5 2xl:w-3/6'></div>
           </div>
         </div>
+
+
       </div>
       <div className=' w-5/6 flex  m-auto flex-wrap justify-center items-center text-white text-sm md:text-lg   mt-4 md:justify-start lg:ml-60  md:ml-60 lg:ml-80 xl:ml-96 ' >
         <h6 className='mr-2 ml-24 md:ml-0 2xl:ml-10'>OVERVIEW</h6>
