@@ -26,7 +26,7 @@ const handleChange = (event: { target: { value: React.SetStateAction<string>; };
     setOpenMenu(!openMenu);
   };
   return (
-    <div className='collection-pg'>
+    <div className='collection-pg  bg-red-600 max-h-fit'>
       <div className={`h-2/3 md:h-4/5 w-fit left-0 fixed top-[17%] md:top-[13%] z-20`}>
         {openMenu && <>
           <div className="h-full w-full relative">
@@ -129,7 +129,6 @@ const handleChange = (event: { target: { value: React.SetStateAction<string>; };
                   </svg>
                 </button>
                 <input name="myInput" className=' absolute left-14 top-2 lg:top-4 lg:left-16 bg-inherit   outline-0' placeholder='Search by name, ID, or trait' onChange={handleChange} />
-                {/* <p className='absolute left-14 top-2 lg:top-4 lg:left-16'>Search by name, ID, or trait</p> */}
               </div>
               <div className="info-tabs flex space-x-10 md:space-x-5 md:justify-around col-span-3 lg:col-span-2 xl:col-span-1">
                 <div>
@@ -302,16 +301,15 @@ const handleChange = (event: { target: { value: React.SetStateAction<string>; };
 
         </div>
       </div>
-      <div className='hexagon-collection-gallery h-max overflow-x-hidden absolute top-[42%] overflow-y-hidden pb-28'
-        style={{
+      <div className='absolute top-[42%] h-fit w-full flex justify-center' style={{
           background: `url(${bg.src})`,
           backgroundAttachment: "fixed",
           backgroundSize: "cover",
-        }}
-      >
+        }}>
+      <div className='hexagon-collection-gallery h-max pt-10 md:pt-0 overflow-x-hidden  overflow-y-hidden pb-28'>
         {[...Array(90)].map((_, i) => {
           return (
-            <div className="tile inline-block ml-[13%] w-fit mt-[10px] rotate-[150deg]" key={i} onClick={handleClick}>
+            <div className="tile inline-block ml-[13%] w-fit mt-[50px] rotate-[150deg]" key={i} onClick={handleClick}>
               <div className="hexagon relative inline-block text-center before:w-[17vmax] after:w-[17vmax] w-[17vmax] before:bg-inherit 
                               before:absolute before:left-0 before:content-none  before:h-[14vmax] after:h-[14vmax] h-[14vmax] 
                               after:bg-inherit after:absolute after:left-0 after:content-none after:rotate-[60deg] before:rotate-[60deg]">
@@ -326,7 +324,7 @@ const handleChange = (event: { target: { value: React.SetStateAction<string>; };
         })}
       </div>
 
-
+      </div>
 
     </div>
   );

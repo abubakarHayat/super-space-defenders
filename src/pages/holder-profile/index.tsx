@@ -12,22 +12,30 @@ function index() {
   return (
     <div className='bg-black h-screen w-full overflow-x-hidden pb-9' >
       <Navbar />
-      <div className='h-1/4 flex justify-center m-auto mt-10 items-end w-5/6 relative overflow-hidden lg:h-1/3 xl:h-2/5 -mt-9 '>
+      <div className='h-1/4 sm:h-[27%] md:h-[34%] lg:h-[40%] xl:h-2/5 flex justify-center m-auto mt-10 items-end w-5/6 relative'>
         <Image
-          src="/holder-profile-main-pfp.png"
-          className='w-auto h-3/4'
+          src="/holder-profile-main-pfp-image-01.png"
+          className='w-[30%] h-full -mr-3 md:-mr-4'
           alt="col-icon"
-          height={100}
-          width={100}
-        />
-        <Image
-          src="/Vector 8.png"
-          alt=""
-          className='w-7/12 h-3/4 sm:w-3/4 md:w-full'
           height={1000}
           width={1000}
         />
-        <div className='absolute  w-8/12 h-3/4 right-0 lg:w-4/6 xl:w-8/12 flex items-end justify-end  md:mr-0'>
+        <div className=' h-full w-full relative lg:-ml-2 xl:-ml-5 2xl:-ml-7'>
+          <Image
+            src="/Vector 8.png"
+            alt=""
+            className='w-full h-full'
+            height={1000}
+            width={1000}
+          />
+          <div className='absolute botom-0 left-0 w-full flex  mt-2 flex-wrap  text-white text-xs sm:text-lg' >
+            <h6 className='mr-2 '>OVERVIEW</h6>
+            <h6 className='mr-2' >INVENTORY</h6>
+            <h6 className='mr-2' >INVENTORY</h6>
+            <h6 className='mr-1' >ACCOUNT</h6>
+          </div>
+        </div>
+        <div className='absolute  w-8/12 h-full right-0 lg:w-4/6 xl:w-8/12 flex items-end justify-end  md:mr-0'>
           <div className='w-10/12  h-full flex flex-col justify-center md:w-11/12 items-start' >
             <div className='h-5/6 w-11/12 flex flex-col justify-between'>
               <div>
@@ -93,16 +101,9 @@ function index() {
             <div className='h-1/5 w-full bg-white mb-2 sm:w-10/12 md:w-3/4 lg:w-8/12 xl:w-3/5 2xl:w-3/6'></div>
           </div>
         </div>
-
-
       </div>
-      <div className=' w-5/6 flex  m-auto flex-wrap justify-center items-center text-white text-sm md:text-lg   mt-4 md:justify-start lg:ml-60  md:ml-60 lg:ml-80 xl:ml-96 ' >
-        <h6 className='mr-2 ml-24 md:ml-0 2xl:ml-10'>OVERVIEW</h6>
-        <h6 className='mr-2' >INVENTORY</h6>
-        <h6 className='mr-2' >INVENTORY</h6>
-        <h6 className='mr-1' >ACCOUNT</h6>
-      </div>
-      <div className='h-1/4 flex justify-center mt-20 lg:mt-22 md:h-[30%]  xl:mt-24'>
+
+      <div className='h-1/4 flex justify-center mt-24 sm:mt-32  md:mt-36 lg:mt-44  xl:mt-54 lg:mt-22 md:h-[30%]  xl:h-[37%] lg:h-[33%]'>
         <div className="w-5/6 h-full relative m-auto">
           <Image
             src='/Vector7.png'
@@ -112,28 +113,30 @@ function index() {
             width={500}
           />
           <div className='w-full absolute h-full top-0'>
-            <div className='flex  h-full  m-auto flex-col w-5/6 items-center justify-center sm:w-4/5 md:w-9/12 lg:w-6/12 xl:w-6/12 '>
-              <h1 className='font-bugfast text-xl lg:text-2xl'>ACHIVEMENTS</h1>
-              <ul className="achivements-hex-grid ml-4 ">
-                {[...Array(20)].map((_, i) => {
-                  return (
-                    <li className="achivement-hex" key={i}>
-                      <div className="achivements-hex-in">
-                        <a className="achivement-hex-link" href="#">
-                          <img src="/badge-01 2.png" alt="" className="achivement-image" />
+            <div className='flex  h-full  m-auto flex-col w-[90%] items-center justify-start lg:w-[80%]  xl:w-[75%] mt-3  md:mt-4'>
+              <h1 className='font-bugfast text-xl md:text-2xl mb-4'>ACHIVEMENTS</h1>
+              <div className='w-full h-[72%] md:h-[75%] '>
+                <ul className="achivements-hex-grid ml-4 ">
+                  {[...Array(20)].map((_, i) => {
+                    return (
+                      <li className="achivement-hex" key={i}>
+                        <div className="achivements-hex-in">
+                          <a className="achivement-hex-link" href="#">
+                            <img src="/badge-01 2.png" alt="" className="achivement-image" />
 
-                        </a>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
+                          </a>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </div>
           </div>
 
         </div>
       </div>
-      <div className='h-1/4 flex justify-center mt-5 lg:mt-1 sm:h-1/3'>
+      <div className='h-1/4 flex justify-center mt-5 lg:mt-1 sm:h-1/3 xl:h-[40%] lg:h-[35%]'>
         <div className="relative w-5/6 h-full" >
           <Image
             src='/Vector7.png'
@@ -152,7 +155,7 @@ function index() {
       </div>
     </div>
 
-    
+
   )
 }
 

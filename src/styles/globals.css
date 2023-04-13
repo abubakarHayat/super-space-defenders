@@ -252,9 +252,7 @@ body {
   }
 
   .hexagon-collection-gallery {
-    height: max-content;
     width: 45vmax;
-    top: 40%;
   }
 
   .tile {
