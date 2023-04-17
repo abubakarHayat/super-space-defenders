@@ -1,13 +1,7 @@
 import React from 'react'
 import Navbar from '../../components/Navbar'
 import Image from "next/image";
-import holder from "../../../public/holder-profile-main-pfp-image-01.png";
-import TopSectionDiv from "../../../public/Vector 8.png";
-import BackStoryDiv from "../../../public/Vector 7.png";
 
-import achivements from '../../../public/holder-profile-achievements.png'
-import Divider from '../../../public/page-title-bar-01 2.png'
-import HeaderPic from '../../../public/aurora-collection-icon-01.png'
 function index() {
   return (
     <div className='bg-black h-screen w-full overflow-x-hidden pb-9' >
@@ -33,30 +27,26 @@ function index() {
             <h6 className='mr-2' >INVENTORY</h6>
             <h6 className='mr-2' >INVENTORY</h6>
             <h6 className='mr-1' >ACCOUNT</h6>
-          </div>
+          </div>collection-detail/lucifer 
         </div>
         <div className='absolute  w-8/12 h-full right-0 lg:w-4/6 xl:w-8/12 flex items-end justify-end  md:mr-0'>
           <div className='w-10/12  h-full flex flex-col justify-center md:w-11/12 items-start' >
             <div className='h-5/6 w-11/12 flex flex-col justify-between'>
               <div>
-
                 <div className='flex justify-between items-end'>
                   <h1 className='font-bugfast text-3xl xl:text-4xl min-w-max'>SCYE ANURIAN</h1>
                   <h3 className='font-bugfast text-sm text-white min-w-max' >LVL 24</h3>
                 </div>
-
                 <Image
                   src="/page-title-bar-01 2.png"
                   alt=""
                   height={1000}
                   width={1000}
                 />
-
                 <div className='flex justify-between'>
                   <p className='min-w-max'>MASTER PILOT</p>
                   <p>0xc42...20cE2</p>
                 </div>
-
               </div>
               <div className='flex justify-between'>
                 <div className='flex items-center justify-start w-9/12 sm:w-9/12 md:w-8/12'>
@@ -136,7 +126,7 @@ function index() {
 
         </div>
       </div>
-      <div className='h-1/4 flex justify-center mt-5 lg:mt-1 sm:h-1/3 xl:h-[40%] lg:h-[35%]'>
+      <div className='h-1/4 flex justify-center mt-5 lg:mt-1 sm:h-1/3 xl:h-[40%] lg:h-[35%] 2xl:mt-7'>
         <div className="relative w-5/6 h-full" >
           <Image
             src='/Vector7.png'

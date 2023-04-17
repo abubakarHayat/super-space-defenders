@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import Image from "next/image";
 import Navbar from "./Navbar";
-import bg2 from "../../public/PFPs/ssd-pfp-03.jpg";
-import Tile from "./Tile";
 import bg from "../../public/space-bg-01.jpg";
 import collectionPic from '../../public/modalPic.png';
-import { FaTimes } from 'react-icons/fa';
 import collectionPicFrame from '../../public/pfp-gallery-hex-boundary.png';
 
 function CollectionsPage() {
@@ -189,8 +186,6 @@ const handleChange = (event: { target: { value: React.SetStateAction<string>; };
                     height={1000}
                     width={1000}
                   />
-
-
                   <div className="modal-content flex justify-center overflow-hidden h-[70%] w-4/5 fixed top-[150px] m-auto ml-[20px] z-20 ">
                     <div className="leftSide mr-4 w-[40%] h-full flex justify-center items-center relative">
                       <Image
@@ -213,7 +208,7 @@ const handleChange = (event: { target: { value: React.SetStateAction<string>; };
 
                       <div className="profie-info ">
                         <div className="profie-info-picture">
-                          <div className="logo">
+                          <div className="logo w-3/5 h-3/5">
                             <Image
                               className="Profie-picture"
                               src="/logo.png"
@@ -280,7 +275,7 @@ const handleChange = (event: { target: { value: React.SetStateAction<string>; };
                         />
                         <div className='absolute top-4'>
                           <h1 className="h-1/5 ml-[2%] font-bugfast">BackStory</h1>
-                          <p className="mt-2 h-[60%] ml-[2%] text-sm">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                          <p className="mt-2 h-[60%] ml-[2%] text-sm mr-1">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                             Nulla veniam fugit ex beatae officiis ad ratione eligendi atque. Consectetur quia
                             accusamus provident rem sun
                             t maiores quaerat odit inventore natus culpa Lorem

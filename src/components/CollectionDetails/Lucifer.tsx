@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Image from "next/image";
 import bg from "../../../public/Rectangle12.png";
-import lucifer from '@/pages/collection-detail/lucifer';
 
 function Lucifer() {
   return (
@@ -19,24 +18,23 @@ function Lucifer() {
           <div className='lg:w-[70%] lg:2/4 xl:w-[60%] bg-black bg-opacity-30 h-full overflow-y-scroll  scroll-bar flex flex-col justify-between'>
             <div className='mb-5 md:mb-2 2xl:mb-7 md:h-[95%] lg:h-auto 2xl:h-[95%] flex flex-col justify-between'>
               <div>           
-                  <h1 className='font-bugfast text-2xl  sm:text-2xl xl:text-4xl 2xl:text-5xl  3xl:text-12xl text-white mt-2 mb-2  '>PROJECT LUCIFER</h1>
-              <Image
-                className='w-5/5'
-                src="/page-title-bar.png"
-                alt="col-icon"
-                height={1000}
-                width={1000}
-              />
-              <p className='w-full mt-2 text-lg  md:text-xl lg:mt-6'> <span className='font-bold'>Project Lucfer </span> is comprised of 6,666 Cloned Individuals. They share the same universe of Super Space Defenders, facing the same challenges and opportunities for new adventures.</p>
-              <ol className='list-[square] ml-10 text-white text-lg   md:text-xl '>
-                <li className='mt-3 xl:mt-4 font-light'>Lucifers share most of the Super Space Defenders benefits.</li>
-                <li  className='mt-3 xl:mt-4 font-light'>Just like SSD, youll have access to exclusive community-focused events such as NFT Drops, Lore Building Activities, and more!.</li>
-                <li className='mt-3 xl:mt-4 font-light'>Access to the <span className='font-bold'> &ldquo; Defenders Arcade &rdquo; </span></li>
-                <li className='mt-3 xl:mt-4 font-light'>Increasing your Multiplier during major Airdrops/Launches if owning a Capsule or Defender..</li>
-                <li className='mt-3 xl:mt-4 font-light'>Admission to participate in our upcoming <span className='font-bold'> &ldquo; Crafting &rdquo; & &ldquo; Economy Systems &rdquo; </span></li>
-                <li className='mt-3 xl:mt-4 font-light'>Exclusive holder only bonuses in upcoming product campaign.</li>
-
-              </ol>
+                <h1 className='font-bugfast text-2xl  sm:text-2xl xl:text-4xl 2xl:text-5xl  3xl:text-12xl text-white mt-2 mb-2  '>PROJECT LUCIFER</h1>
+                <Image
+                  className='w-5/5'
+                  src="/page-title-bar.png"
+                  alt="col-icon"
+                  height={1000}
+                  width={1000}
+                />
+                <p className='w-full mt-2 text-lg  md:text-xl lg:mt-6'> <span className='font-bold'>Project Lucfer </span> is comprised of 6,666 Cloned Individuals. They share the same universe of Super Space Defenders, facing the same challenges and opportunities for new adventures.</p>
+                <ol className='list-[square] ml-10 text-white text-lg   md:text-xl '>
+                  <li className='mt-3 xl:mt-4 font-light'>Lucifers share most of the Super Space Defenders benefits.</li>
+                  <li  className='mt-3 xl:mt-4 font-light'>Just like SSD, youll have access to exclusive community-focused events such as NFT Drops, Lore Building Activities, and more!.</li>
+                  <li className='mt-3 xl:mt-4 font-light'>Access to the <span className='font-bold'> &ldquo; Defenders Arcade &rdquo; </span></li>
+                  <li className='mt-3 xl:mt-4 font-light'>Increasing your Multiplier during major Airdrops/Launches if owning a Capsule or Defender..</li>
+                  <li className='mt-3 xl:mt-4 font-light'>Admission to participate in our upcoming <span className='font-bold'> &ldquo; Crafting &rdquo; & &ldquo; Economy Systems &rdquo; </span></li>
+                  <li className='mt-3 xl:mt-4 font-light'>Exclusive holder only bonuses in upcoming product campaign.</li>
+                </ol>
               </div>
  
               <div className="flex justify-center items-center 2xl:mt-16 mt-7 md:mt-4 lg md:mb-9 lg:mb-4 lg:mt-5 2xl:mb-0 2xl:mt-7 :mt-4  ">

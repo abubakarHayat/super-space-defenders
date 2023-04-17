@@ -45,15 +45,159 @@ body {
 .diagonal-box {
   transform: skewY(5deg);
 }
+.sun {
+  top: 7%;
+  left: 24%;
+}
+.planet-01{
+  top: 17%;
+  left: 7%;
+}
+.planet-02{
+  top: 70%;
+  left: 15%;
+}
+.planet-03{
+  top: 60%;
+  right: 10%;
+}
+.planet-04{
+  top: 8%;
+  right: 14%;
+}
+.moon-01{
+  top: 40%;
+  left: 25%;
+}
+.moon-02{
+  top: 70%;
+  left: 33%;
+}
+.moon-03{
+  top: 60%;
+  right: 30%;
+}
+.moon-04{
+  top: 45%;
+  right: 18%;
+}
+.moon-05{
+  top: 7%;
+  right: 30%;
+}
+.spacestation-01 {
+  top: 7%;
+  left: 30%;
+}
+.galaxy-01 {
+  bottom: 5%;
+  right: 30%;
+}
+@media screen and (max-width: 768px) {
+
+  .planet-02 {
+    top: 50%;
+    left: 17%;
+  }
+  .planet-03 {
+    top: 40%;
+    right: 10%;
+  }
+  .moon-01{
+    top: 30%;
+    left: 25%;
+  }
+  .moon-02{
+    top: 50%;
+    left: 40%;
+  }
+  .moon-03{
+    top: 43%;
+    right: 30%;
+  }
+  .moon-04{
+    top: 30%;
+    right: 15%;
+  }
+  .galaxy-01 {
+    bottom: 30%;
+    right: 30%;
+  }
+}
+@media screen and (max-width: 641px) {
+  .sun {
+    top: 15%;
+    left: 28%;
+  }
+  .planet-02 {
+    top: 40%;
+    left: 17%;
+  }
+  .planet-04{
+    top: 8%;
+    right: 20%;
+  }
+  .moon-01{
+    top: 23%;
+    left: 24%;
+  }
+  .moon-02{
+    top: 40%;
+    left: 35%;
+  }
+  .moon-03{
+    top: 40%;
+    right: 30%;
+  }
+  .moon-05{
+    top: 7%;
+    right: 40%;
+  }
+  .spacestation-01 {
+    top: 7%;
+    left: 20%;
+  }
+  .galaxy-01 {
+    top: 45%;
+    right: 30%;
+  }
+}
+/* @media screen and (max-width: 1250px) {
+  .sun {
+    left: 23%;
+  }
+}
+@media screen and (max-width: 1028px) {
+  .sun {
+    left: 13%;
+  }
+  .earth-01{
+    top: 17%;
+    left: 5%;
+  }
+}
+@media screen and (max-width: 900px) {
+  .sun {
+    left: 7%;
+  }
+  .earth-01{
+    top: 17%;
+    left: 5%;
+  }
+}
+@media screen and (max-width: 800px) {
+  .sun {
+    left: 0%;
+  }
+} */
 
 /* .carousel, .carousel-bg {
   height: 120vh;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
 }*/
 .carousel {
-  box-shadow: inset 0 -18em 6em rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 18em 6em rgba(0, 0, 0, 0.7);
 }
-
 /*
 .collection {
 
@@ -62,14 +206,16 @@ body {
 } */
 .collection,
 .gal-map,
-.archives {
+.archives,
+.retro {
   transform: skewY(5deg);
 }
 
 .group,
 .opensea,
 .gal-map-content,
-.archives-content {
+.archives-content,
+.retro-content {
   transform: skewY(-5deg);
 }
 
@@ -91,7 +237,7 @@ body {
   filter: none;
 }
 
-.char-list::-webkit-scroll-bar {
+.char-list::-webkit-scrollbar {
   width: 0 !important;
 }
 
@@ -155,38 +301,6 @@ body {
   background: green;
   border-bottom: 1px solid white;
 }
-
-/* @media (max-width: 1024px) {
-  .carousel, .carousel-bg{
-    height: 100%;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 95%);
-  }
-  .collection {
-    margin-top: -50px;
-    clip-path: polygon(0 0, 100% 4%, 100% 100%, 0 95%);
-  }
-}
-@media (max-width: 900px) {
-  .collection {
-    margin-top: -52px;
-    clip-path: polygon(0 0, 100% 4%, 100% 100%, 0 95%);
-  }
-}
-@media (max-width: 768px) {
-  .collection {
-    margin-top: -54px;
-    clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
-  }
-}
-@media (max-width: 453px) {
-  .collection {
-    margin-top: -75px;
-    clip-path: polygon(0 0, 100% 8%, 100% 100%, 0 95%);
-  }
-}
-.char-list {
-  transform: skewY(2.5deg);
-} */
 
 /* ----------HEX---------------------------*/
 

@@ -32,7 +32,7 @@ function CollectionDetail() {
           <div className='lg:w-[70%] lg:2/4 xl:w-[60%] bg-black bg-opacity-30 h-full overflow-y-scroll  scroll-bar flex flex-col justify-between'>
             <div className='mb-5 md:mb-2 2xl:mb-7 md:h-[95%] lg:h-auto 2xl:h-[95%] flex flex-col justify-between'>
               <div>           
-                  <h1 className='font-bugfast text-2xl  sm:text-2xl xl:text-4xl 2xl:text-5xl  3xl:text-12xl text-white mt-2 mb-2  '>SUPER SPACE DEFENDERS==</h1>
+                  <h1 className='font-bugfast text-2xl  sm:text-2xl xl:text-4xl 2xl:text-5xl  3xl:text-12xl text-white mt-2 mb-2  '>SUPER SPACE DEFENDERS</h1>
               <Image
                 className='w-5/5'
                 src="/page-title-bar.png"

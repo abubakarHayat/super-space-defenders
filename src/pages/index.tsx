@@ -1,12 +1,11 @@
 import Head from "next/head";
-import Carousel from "@/components/Carousel";
-import Collection from "@/components/Collection";
-import GalacticMap from "@/components/GalacticMap";
-import Archives from "@/components/Archives";
-import DefendersArcade from "@/components/DefendersArcade";
-import CollectionsPage from "@/components/CollectionsPage";
-import InteractiveLore from "@/components/InteractiveLore"
-import HolderProfile from "@/components/HolderProfile"
+import Carousel from "@/components/Index/Carousel";
+import Collection from "@/components/Index/Collection";
+import GalacticMap from "@/components/Index/GalacticMap";
+import Archives from "@/components/Index/Archives";
+import Arcade from "@/components/Index/Arcade";
+import RetroMachines from "@/components/Index/RetroMachines";
+import Footer from "@/components/Index/Footer";
 export default function Home() {
   return (
     <>
@@ -18,14 +17,13 @@ export default function Home() {
       </Head>
 
       <Carousel />
-      <Collection/>
+      <RetroMachines />
+      <Collection />
       <GalacticMap />
+      <Arcade />
       <Archives />
-
-      <InteractiveLore /> 
-      <DefendersArcade/>
-      <HolderProfile/>
-      <CollectionsPage />
+      <Footer />
     </>
   );
 }
+
