@@ -35,7 +35,7 @@ function About() {
                 <h1 className='font-bugfast text-xl xl:text-6xl text-white my-1'>The Team</h1>
                 <Image
                     className='w-3/5'
-                    src="/page-title-bar.png"
+                    src="/gallery-pfp-details-bar-white.png"
                     alt="col-icon"
                     height={100}
                     width={100}

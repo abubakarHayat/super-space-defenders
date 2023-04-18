@@ -18,7 +18,7 @@ function Inventory() {
         />
         <div className=' h-full w-full relative lg:-ml-2 xl:-ml-5 2xl:-ml-7'>
           <Image
-            src="/Vector 8.png"
+            src="/vector8.png"
             alt=""
             className='w-full h-full'
             height={1000}
@@ -96,7 +96,7 @@ function Inventory() {
       </div>
       <div className='h-3/5 flex justify-center  relative lg:h-[70%] xl:h-3/4 2xl:h-4/5 mt-24 sm:mt-36'>
         <Image
-          src='/Vector7.png'
+          src='/vector7.png'
           className='w-5/6 h-full'
           alt="home-icon-02"
           height={500}
@@ -107,7 +107,7 @@ function Inventory() {
         <div className='absolute top-0  h-full w-5/6 flex justify-center items-center '>
           <div className='h-3/4 relative'>
             <Image
-              src='/Vector7.png'
+              src='/vector7.png'
               className='w-full h-full'
               alt="home-icon-02"
               height={500}
@@ -168,7 +168,7 @@ function Inventory() {
                     return (
                       <div className="closet-item" key={i}>
                         <Image
-                          src="/Vector 4.png"
+                          src="/vector4.png"
                           alt=''
                           className='h-full w-full'
                           height={1000}
@@ -185,7 +185,7 @@ function Inventory() {
                 </div>
                 <div className="h-[30%] w-full flex justify-center items-start flex-col relative overflow-hidden">
                   <Image
-                    src="/Vector 5.png"
+                    src="/vector5.png"
                     alt=''
                     className='h-full w-[98%]'
                     height={1000}

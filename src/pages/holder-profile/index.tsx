@@ -16,7 +16,7 @@ function index() {
         />
         <div className=' h-full w-full relative lg:-ml-2 xl:-ml-5 2xl:-ml-7'>
           <Image
-            src="/Vector 8.png"
+            src="/vector8.png"
             alt=""
             className='w-full h-full'
             height={1000}
@@ -96,7 +96,7 @@ function index() {
       <div className='h-1/4 flex justify-center mt-24 sm:mt-32  md:mt-36 lg:mt-44  xl:mt-54 lg:mt-22 md:h-[30%]  xl:h-[37%] lg:h-[33%]'>
         <div className="w-5/6 h-full relative m-auto">
           <Image
-            src='/Vector7.png'
+            src='/vector7.png'
             className='w-full h-full'
             alt="home-icon-02"
             height={500}

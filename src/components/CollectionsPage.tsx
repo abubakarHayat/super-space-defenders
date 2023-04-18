@@ -103,7 +103,7 @@ const handleChange = (event: { target: { value: React.SetStateAction<string>; };
               <div className="input-container w-full mr-10 col-span-3 xl:col-span-1 relative">
 
                 <Image
-                  src="/Vector 2.png"
+                  src="/vector2.png"
                   className='h-10 lg:h-14 w-full bg-transparent'
                   alt="col-icon"
                   height={1000}
@@ -180,7 +180,7 @@ const handleChange = (event: { target: { value: React.SetStateAction<string>; };
               {openModal && <>
                 <div className="flex w-full h-full justify-center z-30">
                   <Image
-                    src="/Vector 7.png "
+                    src="/vector7.png "
                     alt=''
                     className='backdrop-blur w-[72%] h-[72%] fixed top-[140px] ml-5 bg-black opacity-90 sm:rounded-tl-sm sm:rounded-br-sm rounded-bl-[30px] rounded-tr-[30px] sm:rounded-tr-[39px] md:rounded-tr-[45px] lg:rounded-tr-[57px] xl:rounded-tr-[68px] 2xl:rounded-tr-[84px]   z-20    sm:rounded-bl-[39px] md:rounded-bl-[45px] lg:rounded-bl-[57px] xl:rounded-bl-[68px] 2xl:rounded-bl-[84px]'
                     height={1000}
@@ -250,7 +250,7 @@ const handleChange = (event: { target: { value: React.SetStateAction<string>; };
                           return (
                             <div className="closet-item " key={i}>
                               <Image
-                                src="/Vector 4.png"
+                                src="/vector4.png"
                                 alt=''
                                 className='h-full w-full'
                                 height={100}
@@ -267,7 +267,7 @@ const handleChange = (event: { target: { value: React.SetStateAction<string>; };
                       </div>
                       <div className="h-[30%] w-[99%] flex justify-center items-start flex-col relative overflow-hidden">
                         <Image
-                          src="/Vector 5.png"
+                          src="/vector5.png"
                           alt=''
                           className='h-full w-[99%]'
                           height={1000}

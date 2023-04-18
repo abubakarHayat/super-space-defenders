@@ -111,7 +111,7 @@ function CollectionDetail() {
 
     { modalOpen &&  <div className="flex w-full h-full justify-center z-30 relative">
         <Image
-          src="/Vector 7.png "
+          src="/vector7.png "
           alt=''
           className='backdrop-blur w-[90%] h-[40%] md:h-[43%] fixed top-[150px] bg-black opacity-90 sm:w-3/4 md:w-[60%] lg:w-2/4 xl:w-[40%] 2xl:w-[30%]'
           height={1000}
@@ -151,7 +151,7 @@ function CollectionDetail() {
                   <div className='h-full w-2/3 flex items-center justify-center items-end relative' >
                     <Image
                       className="w-[90%] h-full"
-                      src="/Vector 1.png"
+                      src="/vector1.png"
                       alt="pfp"
                       height={100}
                       width={100}
