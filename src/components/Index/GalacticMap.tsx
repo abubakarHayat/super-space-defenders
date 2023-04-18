@@ -12,7 +12,7 @@ function GalacticMap() {
       <div className="gal-map-content xl:mr-32 mb-32 flex flex-col items-center space-y-3 xl:items-end">
         <div>
           <p className="text-[#28A1E5] font-bugfast text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-right xl:text-head">
-            GALACTIC <span className="">HOLOMAP</span>
+            GALACTIC <span className="text-white">HOLOMAP</span>
           </p>
         </div>
         <div className="w-3/4 lg:w-2/4 mt-5">
