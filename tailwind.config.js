@@ -3,6 +3,12 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      colors: {
+        lucifer: "#B4E528",
+        galactic: "#28A1E5",
+        arcade: "#EDB92C",
+        footer: "#222222",
+      },
       height: {
         "10v": "10vh",
         "20v": "20vh",

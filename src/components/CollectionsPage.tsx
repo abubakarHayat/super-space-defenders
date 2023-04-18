@@ -23,7 +23,7 @@ const handleChange = (event: { target: { value: React.SetStateAction<string>; };
     setOpenMenu(!openMenu);
   };
   return (
-    <div className='collection-pg  bg-red-600 max-h-fit'>
+    <div className='collection-pg max-h-fit'>
       <div className={`h-2/3 md:h-4/5 w-fit left-0 fixed top-[17%] md:top-[13%] z-20`}>
         {openMenu && <>
           <div className="h-full w-full relative">

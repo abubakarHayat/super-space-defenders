@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Navbar from "../Navbar";
 import bg from "../../../public/planet-details-bg-02.png";
-import titleBar from "../../../public/page-title-bar-01.png";
 function PlanetDetails() {
   return (
     <div
@@ -26,7 +25,7 @@ function PlanetDetails() {
               </span>
             </h2>
             <Image
-              src="/page-title-bar-01.png"
+              src="/gallery-pfp-details-bar-white.png"
               alt="title bar"
               width={810}
               height={30}
