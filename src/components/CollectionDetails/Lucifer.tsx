@@ -21,7 +21,7 @@ function Lucifer() {
                 <h1 className='font-bugfast text-2xl  sm:text-2xl xl:text-4xl 2xl:text-5xl  3xl:text-12xl text-white mt-2 mb-2  '>PROJECT LUCIFER</h1>
                 <Image
                   className='w-5/5'
-                  src="/page-title-bar.png"
+                  src="/gallery-pfp-details-bar-white.png"
                   alt="col-icon"
                   height={1000}
                   width={1000}
