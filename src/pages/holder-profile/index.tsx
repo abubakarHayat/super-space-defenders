@@ -129,7 +129,7 @@ function index() {
       <div className='h-1/4 flex justify-center mt-5 lg:mt-1 sm:h-1/3 xl:h-[40%] lg:h-[35%] 2xl:mt-7'>
         <div className="relative w-5/6 h-full" >
           <Image
-            src='/Vector7.png'
+            src='/vector7.png'
             className='w-full h-full'
             alt="home-icon-02"
             height={500}
