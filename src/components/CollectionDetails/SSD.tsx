@@ -35,7 +35,7 @@ function CollectionDetail() {
                   <h1 className='font-bugfast text-2xl  sm:text-2xl xl:text-4xl 2xl:text-5xl  3xl:text-12xl text-white mt-2 mb-2  '>SUPER SPACE DEFENDERS</h1>
               <Image
                 className='w-5/5'
-                src="/gallery-pfp-details-bar-01 1.png"
+                src="/gallery-pfp-details-bar-white.png"
                 alt="col-icon"
                 height={1000}
                 width={1000}
