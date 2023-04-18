@@ -180,7 +180,7 @@ const handleChange = (event: { target: { value: React.SetStateAction<string>; };
               {openModal && <>
                 <div className="flex w-full h-full justify-center z-30">
                   <Image
-                    src="/vector7.png "
+                    src="/vector7.png"
                     alt=''
                     className='backdrop-blur w-[72%] h-[72%] fixed top-[140px] ml-5 bg-black opacity-90 sm:rounded-tl-sm sm:rounded-br-sm rounded-bl-[30px] rounded-tr-[30px] sm:rounded-tr-[39px] md:rounded-tr-[45px] lg:rounded-tr-[57px] xl:rounded-tr-[68px] 2xl:rounded-tr-[84px]   z-20    sm:rounded-bl-[39px] md:rounded-bl-[45px] lg:rounded-bl-[57px] xl:rounded-bl-[68px] 2xl:rounded-bl-[84px]'
                     height={1000}

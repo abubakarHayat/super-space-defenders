@@ -37,8 +37,8 @@ function About() {
                     className='w-3/5'
                     src="/gallery-pfp-details-bar-white.png"
                     alt="col-icon"
-                    height={100}
-                    width={100}
+                    height={1000}
+                    width={1000}
                 />
             </div>
             <div className='w-5/6 m-auto flex '>
