@@ -1,6 +1,6 @@
 import Head from "next/head";
-import Carousel from "@/components/Index/Carousel";
-import Collection from "@/components/Index/Collection";
+import Main from "@/components/Index/Main";
+import Carousel from "@/components/Index/Carousel/Carousel";
 import GalacticMap from "@/components/Index/GalacticMap";
 import Archives from "@/components/Index/Archives";
 import Arcade from "@/components/Index/Arcade";
@@ -16,9 +16,9 @@ export default function Home() {
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
 
-      <Carousel />
+      <Main />
       <RetroMachines />
-      <Collection />
+      <Carousel />
       <GalacticMap />
       <Arcade />
       <Archives />
@@ -26,4 +26,3 @@ export default function Home() {
     </>
   );
 }
-

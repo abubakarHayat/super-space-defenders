@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        defender: "#E52847",
         lucifer: "#B4E528",
         galactic: "#28A1E5",
         arcade: "#EDB92C",

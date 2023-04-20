@@ -15,31 +15,39 @@ function Navbar() {
           />
         </div>
         <div>
-          <ul className="flex lg:space-x-3 xl:space-x-5 w-full text-white items-center 2xl:text-xl">
+          <ul className="flex lg:space-x-3 xl:space-x-5 w-full text-white items-center lg:text-sm 2xl:text-xl">
             <li className="cursor-pointer hover:border-white hover:border-b-2">
               <Link href="/">
                 <span>HOME</span>
               </Link>
             </li>
             <li className="cursor-pointer hover:border-white hover:border-b-2">
-              <Link href="/collections">
+              <Link href="/collection">
                 <span>COLLECTIONS</span>
               </Link>
             </li>
             <li className="cursor-pointer hover:border-white hover:border-b-2">
-              <span>HOLOMAP</span>
+              <Link href="/holomap">
+                <span>HOLOMAP</span>
+              </Link>
             </li>
             <li className="cursor-pointer hover:border-white hover:border-b-2">
-              <span>LORE</span>
+              <Link href="/lore">
+                <span>LORE</span>
+              </Link>
             </li>
             <li className="cursor-pointer hover:border-white hover:border-b-2">
-              <span>ARCADE</span>
+              <Link href="/defenders-arcade">
+                <span>ARCADE</span>
+              </Link>
             </li>
             <li className="cursor-pointer hover:border-white hover:border-b-2">
-              <span>ABOUT</span>
+              <Link href="/about">
+                <span>ABOUT</span>
+              </Link>
             </li>
-            <li className="text-xl text-white">
-              <button className="bg-red-500 px-5 w-50 btn-con-wallet h-14">
+            <li className="text-xl lg:text-sm xl:text-xl text-white">
+              <button className="bg-red-500 px-5 xl:w-50 btn-con-wallet h-14 lg:h-10 xl:h-14">
                 CONNECT WALLET
               </button>
             </li>
@@ -48,7 +56,6 @@ function Navbar() {
       </nav>
 
       <nav className="grid lg:hidden grid-cols-2 justify-items-stretch w-full">
-        {/* <span className="text-xl w-full">Super Space Defenders</span> */}
         <Image
           src="/ssd-logo-01.png"
           alt="ssd-logo"
@@ -98,22 +105,34 @@ function Navbar() {
           }`}
         >
           <li className="hover:bg-red-200 rounded-md p-2">
-            <span>HOME</span>
+            <Link href="/">
+              <span>HOME</span>
+            </Link>
           </li>
           <li className="hover:bg-red-200 rounded-md p-2">
-            <span>COLLECTIONS</span>
+            <Link href="/collection">
+              <span>COLLECTIONS</span>
+            </Link>
           </li>
           <li className="hover:bg-red-200 rounded-md p-2">
-            <span>HOLOMAP</span>
+            <Link href="/holomap">
+              <span>HOLOMAP</span>
+            </Link>
           </li>
           <li className="hover:bg-red-200 rounded-md p-2">
-            <span>LORE</span>
+            <Link href="/lore">
+              <span>LORE</span>
+            </Link>
           </li>
           <li className="hover:bg-red-200 rounded-md p-2">
-            <span>ARCADE</span>
+            <Link href="/defenders-arcade">
+              <span>ARCADE</span>
+            </Link>
           </li>
           <li className="hover:bg-red-200 rounded-md p-2">
-            <span>ABOUT</span>
+            <Link href="/about">
+              <span>ABOUT</span>
+            </Link>
           </li>
           <li className="text-md text-white">
             <button className="bg-red-500 w-44 btn-con-wallet h-10">
