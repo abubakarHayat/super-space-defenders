@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
+  images: {
+    domains: ["super-space-defenders.s3.amazonaws.com"],
+  },
 };
 
 module.exports = nextConfig;

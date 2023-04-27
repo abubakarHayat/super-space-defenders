@@ -1,9 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import Moralis from "moralis";
 import Navbar from "../Navbar";
 import bg from "../../../public/space-bg-01.jpg";
 import collectionPic from "../../../public/modalPic.png";
 import collectionPicFrame from "../../../public/pfp-gallery-hex-boundary.png";
+
+// async function SM() {
+//   await Moralis.start({
+//     apiKey: "7hBcGLYwmnCg8e7BL3BTMP4YNkDlGejEvb06djtRSJsno5BmlBfAd9jLOQqPLqqt",
+//   });
+// }
+
+type nftData = {
+  amount: string;
+  block_number_minted: string;
+  last_metadata_sync: string;
+  last_uri_sync: string;
+  metadata: string;
+  minter_address: string;
+  name: string;
+  possible_spam: boolean;
+  symbol: string;
+  token_address: string;
+  token_hash: string;
+  token_id: string;
+  token_uri: string;
+  updated_at: null;
+};
 
 function CollectionsPage() {
   const [message, setMessage] = useState("");
@@ -16,12 +40,57 @@ function CollectionsPage() {
 
   const [openModal, setOpenModal] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
-  const handleClick = () => {
+  const [currentOpenedNft, setCurrentOpenedNft] = useState<any | null>(null);
+  const handleClick = (i: number) => {
+    setCurrentOpenedNft(nfts[i]);
     setOpenModal(true);
   };
   const handleToggleSideTab = () => {
     setOpenMenu(!openMenu);
   };
+
+  const [nfts, setNfts] = useState<any | null>(null);
+
+  useEffect(() => {
+    const getNfts = async () => {
+      try {
+        await Moralis.start({
+          apiKey:
+            "7hBcGLYwmnCg8e7BL3BTMP4YNkDlGejEvb06djtRSJsno5BmlBfAd9jLOQqPLqqt",
+        });
+        const response = await Moralis.EvmApi.nft.getContractNFTs({
+          chain: "0x1",
+          format: "decimal",
+          mediaItems: false,
+          address: "0x6ea26ecde564df85d4c631e041ff7630296b08b8",
+        });
+
+        const data: any = response.raw.result;
+        let nftData = [];
+        for await (const obj of data.slice(0, 10)) {
+          let singleNftData = await fetch(obj.token_uri, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          });
+          if (singleNftData.ok) {
+            const nft = await singleNftData.json();
+            console.log(nft);
+            nftData.push(nft);
+          }
+        }
+        setNfts(nftData);
+        console.log("hello", nftData);
+
+        // console.log(await singleNftData.json());
+        //setNfts(data);
+        console.log(data);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    getNfts();
+  }, []);
   return (
     <div className="collection-pg max-h-fit">
       <div
@@ -212,10 +281,10 @@ function CollectionsPage() {
                       <div className="leftSide mr-4 w-[40%] h-full flex justify-center items-center relative">
                         <Image
                           className="modal-img h-[96%] w-[97%] ml-[10px]"
-                          src="/modalPic.png"
+                          src={currentOpenedNft.image}
                           alt="col-icon"
-                          height={100}
-                          width={100}
+                          height={200}
+                          width={200}
                         />
                         <Image
                           className="absolute bottom-5 right-2 "
@@ -247,17 +316,17 @@ function CollectionsPage() {
                           </div>
                           <div className="profie-info-content flex flex-col justify-center overflow-hidden">
                             <h1 className="text-xs sm:text-sm w-fit md:text-sm lg:text-lg xl:text-xl 2xl:text-2xl font-bugfast">
-                              SPACE DEFENDER NO. 1234
+                              {currentOpenedNft.name}
                             </h1>
                             <div className="profie-info-Inner-content">
                               {" "}
-                              <h1 className="text-xs sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bugfast">
+                              {/* <h1 className="text-xs sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bugfast">
                                 NO.{" "}
                               </h1>{" "}
                               <p className="text-xs leading-5 font-light w-fit sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
                                 {" "}
                                 1234 | &zwnj;{" "}
-                              </p>{" "}
+                              </p>{" "} */}
                               <h1 className="text-xs sm:text-sm   md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bugfast">
                                 OWNER:
                               </h1>{" "}
@@ -288,27 +357,29 @@ function CollectionsPage() {
                           />
                         </div>
                         <div className="closet-Items scroll-bar  overflow-y-auto overflow-x-hidden h-[45%] w-full flex flex-wrap items-center justify-start md:relative ">
-                          {[...Array(10)].map((_, i) => {
-                            return (
-                              <div className="closet-item " key={i}>
-                                <Image
-                                  src="/vector4.png"
-                                  alt=""
-                                  className="h-full w-full"
-                                  height={100}
-                                  width={100}
-                                />
-                                <div className="closet-item-content flex flex-col w-full h-full justify-center pl-1 md:pl-3 xl:pl-0 absolute top-0 left-3 xl:left-7 2xl:left-8">
-                                  <h1 className="text-sm py-0 my-0 leading-4 font-bugfast">
-                                    BACKGROUND
-                                  </h1>
-                                  <p className="text-sm font-thin py-0 my-0 leading-4">
-                                    Dark Matter
-                                  </p>
+                          {currentOpenedNft.attributes.map(
+                            (el: any, i: number) => {
+                              return (
+                                <div className="closet-item " key={i}>
+                                  <Image
+                                    src="/vector4.png"
+                                    alt=""
+                                    className="h-full w-full"
+                                    height={100}
+                                    width={100}
+                                  />
+                                  <div className="closet-item-content flex flex-col w-full h-full justify-center pl-1 md:pl-3 xl:pl-0 absolute top-0 left-3 xl:left-7 2xl:left-8">
+                                    <h1 className="text-sm py-0 my-0 leading-4 font-bugfast">
+                                      {el.trait_type}
+                                    </h1>
+                                    <p className="text-sm font-thin py-0 my-0 leading-4">
+                                      {el.value}
+                                    </p>
+                                  </div>
                                 </div>
-                              </div>
-                            );
-                          })}
+                              );
+                            }
+                          )}
                         </div>
                         <div className="h-[30%] w-[99%] flex justify-center items-start flex-col relative overflow-hidden">
                           <Image
@@ -323,17 +394,7 @@ function CollectionsPage() {
                               BackStory
                             </h1>
                             <p className="mt-2 h-[60%] ml-[2%] text-sm mr-1">
-                              Lorem, ipsum dolor sit amet consectetur
-                              adipisicing elit. Nulla veniam fugit ex beatae
-                              officiis ad ratione eligendi atque. Consectetur
-                              quia accusamus provident rem sun t maiores quaerat
-                              odit inventore natus culpa Lorem ipsum dolor sit
-                              amet consectetur adipisicing elit. Asperiores
-                              alias aliquam dolores voluptates minus. Commodi
-                              tenetur, ipsa odit esse explicabo placeat modi
-                              nisi accusamus! At esse officia, illo, quam est
-                              numquam molestiae unde qui pariatur blanditiis ut,
-                              incidunt assumenda ab..
+                              {currentOpenedNft.description}
                             </p>
                           </div>
                         </div>
@@ -355,37 +416,38 @@ function CollectionsPage() {
         }}
       >
         <div className="hexagon-collection-gallery h-max pt-10 md:pt-0 overflow-x-hidden  overflow-y-hidden pb-28">
-          {[...Array(90)].map((_, i) => {
-            return (
-              <div
-                className="tile inline-block ml-[13%] w-fit mt-[50px] rotate-[150deg]"
-                key={i}
-                onClick={handleClick}
-              >
+          {nfts &&
+            nfts.map((el: any, i: number) => {
+              return (
                 <div
-                  className="hexagon relative inline-block text-center before:w-[17vmax] after:w-[17vmax] w-[17vmax] before:bg-inherit
+                  className="tile inline-block ml-[13%] w-fit mt-[50px] rotate-[150deg]"
+                  key={i}
+                  onClick={() => handleClick(i)}
+                >
+                  <div
+                    className="hexagon relative inline-block text-center before:w-[17vmax] after:w-[17vmax] w-[17vmax] before:bg-inherit
                               before:absolute before:left-0 before:content-none  before:h-[14vmax] after:h-[14vmax] h-[14vmax]
                               after:bg-inherit after:absolute after:left-0 after:content-none after:rotate-[60deg] before:rotate-[60deg]"
-                >
-                  <img
-                    src={collectionPic.src}
-                    alt=""
-                    className="collection-page-img"
-                  />
-                  <div>
+                  >
                     <img
-                      src={collectionPicFrame.src}
+                      src={el.image}
                       alt=""
-                      className="absolute top-0 right-0 bottom-0 left-0 w-[114%] z-20 h-[128%] -mt-[11%] -ml-[8%] md:w-max md:z-0 md:h-[116%] rotate-[209deg] md:-mt-[10%] md:ml-[1%]"
+                      className="collection-page-img"
                     />
+                    <div>
+                      <img
+                        src={collectionPicFrame.src}
+                        alt=""
+                        className="absolute top-0 right-0 bottom-0 left-0 w-[114%] z-20 h-[128%] -mt-[11%] -ml-[8%] md:w-max md:z-0 md:h-[116%] rotate-[209deg] md:-mt-[10%] md:ml-[1%]"
+                      />
+                    </div>
+                    <p className="collection-page-number lg:text-lg xl:text-3xl 2xl:mt-2">
+                      #1234
+                    </p>
                   </div>
-                  <p className="collection-page-number lg:text-lg xl:text-3xl 2xl:mt-2">
-                    #1234
-                  </p>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </div>
     </div>

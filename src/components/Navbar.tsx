@@ -1,8 +1,35 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { useConnect, useDisconnect, useAccount } from "wagmi";
+import { ethers } from "ethers";
+
+const providerOptions = {};
+
 function Navbar() {
+  const { connect, connectors, error, isLoading, pendingConnector } =
+    useConnect();
+  const { address, connector, isConnected } = useAccount();
+  const { disconnect } = useDisconnect();
+
   const [isOpen, setIsOpen] = useState(false);
+  const [conText, setConText] = useState("CONNECT WALLET");
+
+  const connectWallet = async () => {
+    try {
+      console.log(address);
+      if (isConnected) {
+        disconnect();
+        setConText("CONNECT WALLET");
+      } else {
+        connect({ connector: connectors[0] });
+        setConText("DISCONNECT WALLET");
+      }
+      console.log(address);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <>
       <nav className="hidden lg:flex w-5/6 mx-auto h-32 justify-between items-center">
@@ -47,8 +74,11 @@ function Navbar() {
               </Link>
             </li>
             <li className="text-xl lg:text-sm xl:text-xl text-white">
-              <button className="bg-red-500 px-5 xl:w-50 btn-con-wallet h-14 lg:h-10 xl:h-14">
-                CONNECT WALLET
+              <button
+                className="bg-red-500 px-5 xl:w-50 btn-con-wallet h-14 lg:h-10 xl:h-14"
+                onClick={connectWallet}
+              >
+                {conText}
               </button>
             </li>
           </ul>
@@ -135,8 +165,11 @@ function Navbar() {
             </Link>
           </li>
           <li className="text-md text-white">
-            <button className="bg-red-500 w-44 btn-con-wallet h-10">
-              CONNECT WALLET
+            <button
+              className="bg-red-500 w-44 btn-con-wallet h-10"
+              onClick={connectWallet}
+            >
+              {conText}
             </button>
           </li>
         </ul>
