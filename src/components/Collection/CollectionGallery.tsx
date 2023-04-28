@@ -1,16 +1,11 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Moralis from "moralis";
-import Navbar from "../Navbar";
-import bg from "../../../public/space-bg-01.jpg";
-import collectionPic from "../../../public/modalPic.png";
-import collectionPicFrame from "../../../public/pfp-gallery-hex-boundary.png";
+import ReactPaginate from "react-paginate";
+import { ToastContainer, toast } from "react-toastify";
 
-// async function SM() {
-//   await Moralis.start({
-//     apiKey: "7hBcGLYwmnCg8e7BL3BTMP4YNkDlGejEvb06djtRSJsno5BmlBfAd9jLOQqPLqqt",
-//   });
-// }
+import Navbar from "../Navbar";
+import collectionPicFrame from "../../../public/pfp-gallery-hex-boundary.png";
 
 type nftData = {
   amount: string;
@@ -28,9 +23,34 @@ type nftData = {
   token_uri: string;
   updated_at: null;
 };
-
+const UNREVEALED_TRAITS = [
+  { trait_type: "Faction", value: "Unrevealed" },
+  { trait_type: "Family", value: "Unrevealed" },
+  { trait_type: "Origin", value: "Unrevealed" },
+  { trait_type: "Background", value: "Unrevealed" },
+  { trait_type: "Equipment", value: "Unrevealed" },
+  { trait_type: "Hair", value: "Unrevealed" },
+  { trait_type: "Hair Color", value: "Unrevealed" },
+  { trait_type: "Eye Color", value: "Unrevealed" },
+  { trait_type: "Eyes", value: "Unrevealed" },
+  { trait_type: "Eyewear", value: "Unrevealed" },
+  { trait_type: "Body Marks", value: "Unrevealed" },
+  { trait_type: "Earrings", value: "Unrevealed" },
+  { trait_type: "Communicator", value: "Unrevealed" },
+  { trait_type: "Mouth", value: "Unrevealed" },
+  { trait_type: "Clothes", value: "Unrevealed" },
+];
 function CollectionsPage() {
   const [message, setMessage] = useState("");
+
+  // Here we use item offsets; we could also use page offsets
+  // following the API or data you're working with.
+  const [itemOffset, setItemOffset] = useState(0);
+  const [currentItems, setCurrentItems] = useState<any | null>(null);
+  const [pageCount, setPageCount] = useState(0);
+
+  const [openModal, setOpenModal] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
 
   const handleChange = (event: {
     target: { value: React.SetStateAction<string> };
@@ -38,22 +58,25 @@ function CollectionsPage() {
     setMessage(event.target.value);
   };
 
-  const [openModal, setOpenModal] = useState(false);
-  const [openMenu, setOpenMenu] = useState(false);
   const [currentOpenedNft, setCurrentOpenedNft] = useState<any | null>(null);
   const handleClick = (i: number) => {
-    setCurrentOpenedNft(nfts[i]);
+    setCurrentOpenedNft(currentItems[i]);
     setOpenModal(true);
   };
   const handleToggleSideTab = () => {
     setOpenMenu(!openMenu);
   };
 
+  const itemsPerPage: number = 10;
+
   const [nfts, setNfts] = useState<any | null>(null);
 
   useEffect(() => {
     const getNfts = async () => {
       try {
+        if (nfts === null) {
+          toast("Loading NFTs collection!");
+        }
         await Moralis.start({
           apiKey:
             "7hBcGLYwmnCg8e7BL3BTMP4YNkDlGejEvb06djtRSJsno5BmlBfAd9jLOQqPLqqt",
@@ -66,23 +89,25 @@ function CollectionsPage() {
         });
 
         const data: any = response.raw.result;
+        const tempDataToFetch = data;
+        console.log(tempDataToFetch);
         let nftData = [];
-        for await (const obj of data.slice(0, 10)) {
+        for await (const obj of tempDataToFetch) {
           let singleNftData = await fetch(obj.token_uri, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
           });
           if (singleNftData.ok) {
             const nft = await singleNftData.json();
+            if (nft.attributes.length < 10) {
+              nft.attributes = UNREVEALED_TRAITS;
+            }
             console.log(nft);
             nftData.push(nft);
           }
         }
         setNfts(nftData);
-        console.log("hello", nftData);
 
-        // console.log(await singleNftData.json());
-        //setNfts(data);
         console.log(data);
       } catch (e) {
         console.error(e);
@@ -90,9 +115,32 @@ function CollectionsPage() {
     };
 
     getNfts();
-  }, []);
+    const endOffset = itemOffset + itemsPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+
+    if (nfts !== null) {
+      console.log("HELLO", nfts);
+      toast("Loading NFTs collection!");
+      setCurrentItems(nfts.slice(itemOffset, endOffset));
+      setPageCount(Math.ceil(nfts.length / itemsPerPage));
+    }
+    console.log(itemOffset);
+    console.log("HELLO22", nfts);
+  }, [itemOffset, nfts]);
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event: any) => {
+    const newOffset = (event.selected * itemsPerPage) % nfts.length;
+
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+
   return (
     <div className="collection-pg max-h-fit">
+      <ToastContainer />
       <div
         className={`h-2/3 md:h-4/5 w-fit left-0 fixed top-[17%] md:top-[13%] z-20`}
       >
@@ -115,7 +163,7 @@ function CollectionsPage() {
                 </h1>
               </button>
               <div className=" w-[83%] h-[91%] scroll-bar absolute top-7 overflow-auto  pl-3">
-                {[...Array(1005)].map((_, i) => {
+                {[...Array(10)].map((_, i) => {
                   return (
                     <div className="content-item my-2" key={i}>
                       <h1 className="text-sm md:text-xl lg:text-2xl text-white">
@@ -158,27 +206,16 @@ function CollectionsPage() {
           </div>
         )}
       </div>
-      <div
-        className="h-fit w-full"
-        style={{
-          background: `url(${bg.src})`,
-          backgroundAttachment: "fixed",
-          backgroundSize: "cover",
-        }}
-      >
+      <div className="h-fit w-full bg-gallery">
         <Navbar />
         <div className="main-collection flex flex-col items-center mt-20 ">
           <div className="w-11/12 lg:w-90v  flex items-end">
-            <h1 className="font-bugfast text-xl xl:text-6xl text-white min-w-max">
+            <h1 className="font-bugfast text-xl md:text-2xl lg:text-4xl xl:text-6xl text-white min-w-max">
               COLLECTIONS GALLERY
             </h1>
-            <Image
-              className="h-2 w-[45%] ml-1 sm:w-full mb-2 "
-              alt=""
-              src="/page-title-bar-01 2.png"
-              width={200}
-              height={1000}
-            />
+            <div className="w-full h-1 md:h-2 lg:h-3 relative">
+              <Image alt="title bar" src="/page-title-bar-01 2.png" fill />
+            </div>
           </div>
           <div className="gallery h-80v w-11/12 lg:w-90v  my-2 flex flex-col items-center">
             <div className="sub-nav px-3 md:px-10 m-10 w-full text-white grid grid-cols-3 gap-5">
@@ -296,7 +333,7 @@ function CollectionsPage() {
                       </div>
                       <div className="rightSide w-[48%] h-full flex flex-col justify-center items-start relative">
                         <h1
-                          className="absolute top-6 right-[0.51rem] lg:right-[0.50rem] xl:right-[0.60rem] text-xl lg:text-2xl font-bold rotate-[72deg] lg:rotate-[70deg] xl:rotate-[58deg] 2xl:rotate[61deg] 2xl:right-[0.75rem] md:right-[0.70rem] md:top-8 font-bugfast"
+                          className="absolute top-6 cursor-pointer right-[0.51rem] lg:right-[0.50rem] xl:right-[0.60rem] text-xl lg:text-2xl font-bold rotate-[72deg] lg:rotate-[70deg] xl:rotate-[58deg] 2xl:rotate[61deg] 2xl:right-[0.75rem] md:right-[0.70rem] md:top-8 font-bugfast"
                           onClick={() => setOpenModal(false)}
                         >
                           Close
@@ -329,8 +366,9 @@ function CollectionsPage() {
                               </p>{" "} */}
                               <h1 className="text-xs sm:text-sm   md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bugfast">
                                 OWNER:
-                              </h1>{" "}
+                              </h1>
                               <p className="text-xs leading-5 font-light sm:text-sm  md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
+                                {" "}
                                 VerbalTachi
                               </p>
                             </div>
@@ -369,10 +407,10 @@ function CollectionsPage() {
                                     width={100}
                                   />
                                   <div className="closet-item-content flex flex-col w-full h-full justify-center pl-1 md:pl-3 xl:pl-0 absolute top-0 left-3 xl:left-7 2xl:left-8">
-                                    <h1 className="text-sm py-0 my-0 leading-4 font-bugfast">
+                                    <h1 className="text-md py-0 my-0 leading-4 font-bugfast">
                                       {el.trait_type}
                                     </h1>
-                                    <p className="text-sm font-thin py-0 my-0 leading-4">
+                                    <p className="text-sm py-0 my-0 leading-4">
                                       {el.value}
                                     </p>
                                   </div>
@@ -407,17 +445,10 @@ function CollectionsPage() {
           </div>
         </div>
       </div>
-      <div
-        className="absolute top-[42%] h-fit w-full flex justify-center"
-        style={{
-          background: `url(${bg.src})`,
-          backgroundAttachment: "fixed",
-          backgroundSize: "cover",
-        }}
-      >
+      <div className="absolute top-[42%] h-fit w-full flex flex-col justify-center bg-gallery items-center">
         <div className="hexagon-collection-gallery h-max pt-10 md:pt-0 overflow-x-hidden  overflow-y-hidden pb-28">
-          {nfts &&
-            nfts.map((el: any, i: number) => {
+          {currentItems &&
+            currentItems.map((el: any, i: number) => {
               return (
                 <div
                   className="tile inline-block ml-[13%] w-fit mt-[50px] rotate-[150deg]"
@@ -441,14 +472,34 @@ function CollectionsPage() {
                         className="absolute top-0 right-0 bottom-0 left-0 w-[114%] z-20 h-[128%] -mt-[11%] -ml-[8%] md:w-max md:z-0 md:h-[116%] rotate-[209deg] md:-mt-[10%] md:ml-[1%]"
                       />
                     </div>
-                    <p className="collection-page-number lg:text-lg xl:text-3xl 2xl:mt-2">
-                      #1234
+                    <p className="collection-page-number absolute z-50 text-lg xl:text-3xl 2xl:mt-2">
+                      {`#${el.name.split("#")[1]}`}
                     </p>
                   </div>
                 </div>
               );
             })}
         </div>
+        <ReactPaginate
+          containerClassName="pagination flex flex-wrap gap-y-4 space-x-2 justify-around w-full sm:w-3/4 lg:w-1/2 self-center items-center mb-5 text-white"
+          pageClassName="border-white border-2 rounded-full"
+          pageLinkClassName="p-5"
+          breakLabel="..."
+          nextLabel={
+            <span className="border-white border-2 rounded-full p-2">Next</span>
+          }
+          previousLabel={
+            <span className="border-white border-2 rounded-full p-2">
+              Previous
+            </span>
+          }
+          disabledClassName="opacity-50"
+          activeClassName="bg-white text-black"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          renderOnZeroPageCount={null}
+        />
       </div>
     </div>
   );

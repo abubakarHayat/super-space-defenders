@@ -9,6 +9,7 @@ module.exports = {
         galactic: "#28A1E5",
         arcade: "#EDB92C",
         footer: "#222222",
+        gallery: "#161616",
       },
       height: {
         "10v": "10vh",

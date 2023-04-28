@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar";
 function About() {
   return (
     <div
-      className="py-12"
       style={{
         background: `url(${bg.src})`,
       }}

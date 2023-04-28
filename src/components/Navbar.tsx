@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useConnect, useDisconnect, useAccount } from "wagmi";
-import { ethers } from "ethers";
+import { ToastContainer, toast } from "react-toastify";
 
-const providerOptions = {};
+import "react-toastify/dist/ReactToastify.css";
 
 function Navbar() {
   const { connect, connectors, error, isLoading, pendingConnector } =
@@ -17,17 +17,26 @@ function Navbar() {
 
   const connectWallet = async () => {
     try {
-      console.log(address);
-      if (isConnected) {
-        disconnect();
-        setConText("CONNECT WALLET");
-      } else {
-        connect({ connector: connectors[0] });
-        setConText("DISCONNECT WALLET");
+      if (pendingConnector !== undefined) {
+        toast.error("Wallet ");
       }
+      if (connectors[0].ready) {
+        if (isConnected) {
+          disconnect();
+          setConText("CONNECT WALLET");
+          toast.success("Wallet disconnected!");
+        } else {
+          connect({ connector: connectors[0] });
+          setConText("DISCONNECT WALLET");
+          toast.success("Wallet connected!");
+        }
+      } else {
+        toast.error("Wallet not found!");
+      }
+      console.log(error);
       console.log(address);
     } catch (error) {
-      console.error(error);
+      console.log("H", error);
     }
   };
   return (
@@ -49,27 +58,27 @@ function Navbar() {
               </Link>
             </li>
             <li className="cursor-pointer hover:border-white hover:border-b-2">
-              <Link href="/collection">
+              <Link href="collection">
                 <span>COLLECTIONS</span>
               </Link>
             </li>
             <li className="cursor-pointer hover:border-white hover:border-b-2">
-              <Link href="/holomap">
+              <Link href="holomap">
                 <span>HOLOMAP</span>
               </Link>
             </li>
             <li className="cursor-pointer hover:border-white hover:border-b-2">
-              <Link href="/lore">
+              <Link href="lore">
                 <span>LORE</span>
               </Link>
             </li>
             <li className="cursor-pointer hover:border-white hover:border-b-2">
-              <Link href="/defenders-arcade">
+              <Link href="defenders-arcade">
                 <span>ARCADE</span>
               </Link>
             </li>
             <li className="cursor-pointer hover:border-white hover:border-b-2">
-              <Link href="/about">
+              <Link href="about">
                 <span>ABOUT</span>
               </Link>
             </li>
@@ -140,27 +149,27 @@ function Navbar() {
             </Link>
           </li>
           <li className="hover:bg-red-200 rounded-md p-2">
-            <Link href="/collection">
+            <Link href="collection">
               <span>COLLECTIONS</span>
             </Link>
           </li>
           <li className="hover:bg-red-200 rounded-md p-2">
-            <Link href="/holomap">
+            <Link href="holomap">
               <span>HOLOMAP</span>
             </Link>
           </li>
           <li className="hover:bg-red-200 rounded-md p-2">
-            <Link href="/lore">
+            <Link href="lore">
               <span>LORE</span>
             </Link>
           </li>
           <li className="hover:bg-red-200 rounded-md p-2">
-            <Link href="/defenders-arcade">
+            <Link href="defenders-arcade">
               <span>ARCADE</span>
             </Link>
           </li>
           <li className="hover:bg-red-200 rounded-md p-2">
-            <Link href="/about">
+            <Link href="about">
               <span>ABOUT</span>
             </Link>
           </li>
@@ -174,6 +183,7 @@ function Navbar() {
           </li>
         </ul>
       </nav>
+      <ToastContainer />
     </>
   );
 }
