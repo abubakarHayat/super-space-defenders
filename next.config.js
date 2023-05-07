@@ -5,6 +5,7 @@ const nextConfig = {
     domains: [
       "super-space-defenders.s3.amazonaws.com",
       "super-space-defenders-unrevealed.s3.amazonaws.com",
+      "res.cloudinary.com",
     ],
   },
 };

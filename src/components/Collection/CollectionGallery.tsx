@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Moralis from "moralis";
+import { Alchemy, Network } from "alchemy-sdk";
+
 import ReactPaginate from "react-paginate";
 import { ToastContainer, toast } from "react-toastify";
+import Filter from "./Filter";
 
 import Navbar from "../Navbar";
 import collectionPicFrame from "../../../public/pfp-gallery-hex-boundary.png";
@@ -40,6 +42,82 @@ const UNREVEALED_TRAITS = [
   { trait_type: "Mouth", value: "Unrevealed" },
   { trait_type: "Clothes", value: "Unrevealed" },
 ];
+let TRAITS: any = [
+  {
+    trait_type: "Faction",
+    value: [],
+    // value: ["Citizen", "Elite", "Rebel", "Titanides", "Cult"],
+  },
+  {
+    trait_type: "Family",
+    value: [],
+    // value: [
+    //   "None",
+    //   "Ishikawa",
+    //   "Takahashi",
+    //   "Kobayashi",
+    //   "Tenebris",
+    //   "Yamamoto",
+    // ],
+  },
+  {
+    trait_type: "Origin",
+    value: [],
+    // value: ["Callisto", "Europa", "Ganymede", "Mars", "Earth", "Venus"],
+  },
+  {
+    trait_type: "Background",
+    value: [],
+    // value: [
+    //   "Purlple",
+    //   "Grey",
+    //   "Blue",
+    //   "Peace",
+    //   "Green Peace",
+    //   "Back to Black",
+    //   "Green",
+    //   "New Hope",
+    //   "Red",
+    //   "Cotton Candy",
+    //   "Dark Matter",
+    //   "Abandonware",
+    //   "Jungle",
+    //   "Leafshine",
+    //   "Yellow",
+    //   "Darkshine",
+    //   "Dusk",
+    //   "City of Stars",
+    //   "Moonshine",
+    //   "Sunshine",
+    //   "Love Song",
+    //   "Vaporwave",
+    //   "Lava",
+    //   "Lost Planet",
+    //   "Mountains",
+    //   "Full Moon",
+    //   "Redwave",
+    //   "Starry Night",
+    //   "Black Hole",
+    //   "Heart",
+    //   "Bloody Moon",
+    //   "Outer Space",
+    //   "Old Magazine",
+    //   "Cabin",
+    // ],
+  },
+  { trait_type: "Equipment", value: [] },
+  { trait_type: "Hair", value: [] },
+  { trait_type: "Hair Color", value: [] },
+  { trait_type: "Eye Color", value: [] },
+  { trait_type: "Eyes", value: [] },
+  { trait_type: "Eyewear", value: [] },
+  { trait_type: "Body Marks", value: [] },
+  { trait_type: "Earrings", value: [] },
+  { trait_type: "Communicator", value: [] },
+  { trait_type: "Mouth", value: [] },
+  { trait_type: "Clothes", value: [] },
+];
+
 function CollectionsPage() {
   const [message, setMessage] = useState("");
 
@@ -51,81 +129,75 @@ function CollectionsPage() {
 
   const [openModal, setOpenModal] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
-
+  const [nfts, setNfts] = useState<any | null>(null);
+  const [totalNfts, setTotalNfts] = useState<any | null>(null);
+  const [openFilter, setOpenFilter] = useState<any>([]);
+  const [filterOptions, setFilterOptions] = useState<any | null>(null);
+  const [filterCriteria, setFilterCriteria] = useState<any>({});
   const handleChange = (event: {
     target: { value: React.SetStateAction<string> };
   }) => {
     setMessage(event.target.value);
   };
-
-  const [currentOpenedNft, setCurrentOpenedNft] = useState<any | null>(null);
+  const address = "0x6ea26ecde564df85d4c631e041ff7630296b08b8";
+  const [currentOpenedNft, setCurrentOpenedNft] = useState<any | null>(TRAITS);
+  const filter = () => {};
   const handleClick = (i: number) => {
     setCurrentOpenedNft(currentItems[i]);
     setOpenModal(true);
   };
-  const handleToggleSideTab = () => {
-    setOpenMenu(!openMenu);
-  };
 
   const itemsPerPage: number = 10;
-
-  const [nfts, setNfts] = useState<any | null>(null);
 
   useEffect(() => {
     const getNfts = async () => {
       try {
         if (nfts === null) {
-          toast("Loading NFTs collection!");
-        }
-        await Moralis.start({
-          apiKey:
-            "7hBcGLYwmnCg8e7BL3BTMP4YNkDlGejEvb06djtRSJsno5BmlBfAd9jLOQqPLqqt",
-        });
-        const response = await Moralis.EvmApi.nft.getContractNFTs({
-          chain: "0x1",
-          format: "decimal",
-          mediaItems: false,
-          address: "0x6ea26ecde564df85d4c631e041ff7630296b08b8",
-        });
-
-        const data: any = response.raw.result;
-        const tempDataToFetch = data;
-        console.log(tempDataToFetch);
-        let nftData = [];
-        for await (const obj of tempDataToFetch) {
-          let singleNftData = await fetch(obj.token_uri, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
+          // GET NFTs
+          const config = {
+            apiKey: "PwDmttkyX_PCD-PDQTXPMU-k2ExgCa8O",
+            network: Network.ETH_MAINNET,
+          };
+          const alchemy = new Alchemy(config);
+          const rezz = await alchemy.nft.getNftsForContract(address, {
+            omitMetadata: false,
           });
-          if (singleNftData.ok) {
-            const nft = await singleNftData.json();
-            if (nft.attributes.length < 10) {
-              nft.attributes = UNREVEALED_TRAITS;
-            }
-            console.log(nft);
-            nftData.push(nft);
-          }
-        }
-        setNfts(nftData);
+          setNfts(rezz.nfts);
 
-        console.log(data);
+          setTotalNfts(rezz.nfts);
+
+          const endOffset = itemOffset + itemsPerPage;
+          console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+          toast("Loading NFTs collection!");
+          setCurrentItems(rezz.nfts.slice(itemOffset, endOffset));
+          setPageCount(Math.ceil(rezz.nfts.length / itemsPerPage));
+
+          // GET SSD MetaData for Filter
+          const openseaRes = await fetch(
+            "https://api.opensea.io/api/v1/collection/superspacedefenders",
+            {
+              method: "GET",
+              headers: {
+                "X-Api-Key": process.env.NEXT_PUBLIC_OPENSEA_API_KEY,
+              } as HeadersInit,
+            }
+          );
+          const filterOps = (await openseaRes.json()).collection.traits;
+
+          setFilterOptions(filterOps);
+        } else {
+          const endOffset = itemOffset + itemsPerPage;
+          console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+          toast("Loading NFTs collection!");
+          setCurrentItems(nfts.slice(itemOffset, endOffset));
+          setPageCount(Math.ceil(nfts.length / itemsPerPage));
+        }
       } catch (e) {
         console.error(e);
       }
     };
 
     getNfts();
-    const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-
-    if (nfts !== null) {
-      console.log("HELLO", nfts);
-      toast("Loading NFTs collection!");
-      setCurrentItems(nfts.slice(itemOffset, endOffset));
-      setPageCount(Math.ceil(nfts.length / itemsPerPage));
-    }
-    console.log(itemOffset);
-    console.log("HELLO22", nfts);
   }, [itemOffset, nfts]);
 
   // Invoke when user click to request another page.
@@ -138,73 +210,173 @@ function CollectionsPage() {
     setItemOffset(newOffset);
   };
 
+  const handleOpenFilter = (i: number) => {
+    let op = openFilter.find((el: number) => el === i);
+    if (op !== undefined) {
+      // found
+      let acutalFilter = openFilter.filter((el: number) => el !== op);
+      setOpenFilter(acutalFilter);
+    } else {
+      // not found
+      setOpenFilter((prevState: any) => [...prevState, i]);
+    }
+  };
+
+  const handleFiterCriteria = (search: any) => {
+    let toReplace = { ...filterCriteria };
+
+    if (search.values.length === 0) {
+      delete toReplace[search.trait_type];
+    } else {
+      toReplace[search.trait_type] = search.values;
+    }
+
+    setFilterCriteria(toReplace);
+    let filteredNfts: any = [];
+
+    let allKeys = Object.keys(toReplace);
+
+    // If search options are empty
+    if (allKeys.length === 0) {
+      setNfts(totalNfts);
+      return;
+    }
+
+    // If Traits selected, are more than one
+    if (allKeys.length > 1) {
+      let singleKey = allKeys[0];
+      let restKeys = allKeys.slice(1);
+      // get only single key
+      for (let currNft = 0; currNft < totalNfts.length; currNft++) {
+        let traits = totalNfts[currNft].rawMetadata.attributes;
+        for (let currTrait = 0; currTrait < traits.length; currTrait++) {
+          if (
+            traits[currTrait].trait_type === singleKey &&
+            toReplace[singleKey].includes(traits[currTrait].value)
+          ) {
+            filteredNfts.push(totalNfts[currNft]);
+          }
+        }
+      }
+      // got 'em
+      let actualFilteredNfts = [];
+      for (let currNft = 0; currNft < filteredNfts.length; currNft++) {
+        let traits = filteredNfts[currNft].rawMetadata.attributes;
+        let toAdd = 0;
+        for (let currTrait = 0; currTrait < traits.length; currTrait++) {
+          for (const key of restKeys) {
+            if (
+              traits[currTrait].trait_type === key &&
+              toReplace[key].includes(traits[currTrait].value)
+            ) {
+              toAdd++;
+            }
+          }
+        }
+        if (toAdd === restKeys.length) {
+          actualFilteredNfts.push(filteredNfts[currNft]);
+        }
+      }
+      setNfts(actualFilteredNfts);
+
+      return;
+    }
+
+    for (let currNft = 0; currNft < totalNfts.length; currNft++) {
+      let traits = totalNfts[currNft].rawMetadata.attributes;
+      for (let currTrait = 0; currTrait < traits.length; currTrait++) {
+        for (const key in toReplace) {
+          if (
+            traits[currTrait].trait_type === key &&
+            toReplace[key].includes(traits[currTrait].value)
+          ) {
+            filteredNfts.push(totalNfts[currNft]);
+          }
+        }
+      }
+    }
+
+    setNfts(filteredNfts);
+  };
+
+  const shouldOpenFilter = (toFind: number) => {
+    for (let i = 0; i < openFilter.length; i++) {
+      if (openFilter[i] === toFind) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const returnPreState = (filterTrait: string) => {
+    let values = filterCriteria[filterTrait];
+    if (values === undefined) {
+      values = [];
+    }
+    return { trait_type: filterTrait, values: values };
+  };
+
   return (
     <div className="collection-pg max-h-fit">
       <ToastContainer />
-      <div
-        className={`h-2/3 md:h-4/5 w-fit left-0 fixed top-[17%] md:top-[13%] z-20`}
-      >
-        {openMenu && (
-          <>
-            <div className="h-full w-full relative">
-              <Image
-                src="/Filter Bar Shape.png"
-                alt=""
-                className="w-full h-full "
-                height={1000}
-                width={1000}
-              />
-              <button
-                onClick={handleToggleSideTab}
-                className="absolute top-[43%] right-0  w-[40px] h-[89px]  lg:top-[43.2%] lg:h-[105px]"
-              >
-                <h1 className="absolute top-[50%] right-0 rotate-90 -mt-[18px] md:-mt-[14px] text-lg md:text-2xl -mr-[9px]">
-                  Filter
-                </h1>
-              </button>
-              <div className=" w-[83%] h-[91%] scroll-bar absolute top-7 overflow-auto  pl-3">
-                {[...Array(10)].map((_, i) => {
-                  return (
-                    <div className="content-item my-2" key={i}>
+      <div className="h-2/3 md:h-4/5 w-fit left-0 fixed top-[17%] md:top-[13%] z-10">
+        <div
+          className={
+            openMenu
+              ? "h-full w-full relative"
+              : "h-full w-full relative -left-[89%]"
+          }
+        >
+          <Image
+            src="/Filter Bar Shape.png"
+            alt=""
+            className="w-full h-full "
+            height={1000}
+            width={1000}
+          />
+          <button
+            onClick={() => setOpenMenu(!openMenu)}
+            className="absolute top-[43%] right-0  w-[40px] h-[89px]  lg:top-[43.2%] lg:h-[105px]"
+          >
+            <h1 className="absolute top-[49%] right-1 rotate-90 -mt-[18px] md:-mt-[14px] text-sm md:text-lg lg:text-2xl -mr-[9px]">
+              Filter
+            </h1>
+          </button>
+          <div className=" w-[83%] h-[91%] scroll-bar absolute top-7 overflow-auto  pl-3">
+            {filterOptions &&
+              Object.keys(filterOptions).map((el: any, i: number) => {
+                return (
+                  <div key={i}>
+                    <div className="content-item my-2">
                       <h1 className="text-sm md:text-xl lg:text-2xl text-white">
-                        Background
+                        {el}
                       </h1>
-                      <div className="rightContent flex w-[56px] ">
+                      <div
+                        className="rightContent flex w-[56px] "
+                        onClick={() => handleOpenFilter(i)}
+                      >
                         <p className="text-white">33</p>
                         <Image
                           src="/inv.png"
-                          className=""
+                          className={shouldOpenFilter(i) ? "rotate-180" : ""}
                           alt="col-icon"
                           height={20}
                           width={25}
                         />
                       </div>
                     </div>
-                  );
-                })}
-              </div>
-            </div>
-          </>
-        )}
-        {!openMenu && (
-          <div className="h-full w-full relative -left-[89%]">
-            <Image
-              src="/Filter Bar Shape.png"
-              alt=""
-              className="w-full h-full "
-              height={1000}
-              width={1000}
-            />
-            <button
-              onClick={handleToggleSideTab}
-              className="absolute top-[43%] right-0  w-[40px] h-[89px]  lg:top-[43.2%] lg:h-[105px]"
-            >
-              <h1 className="absolute top-[50%] right-0 rotate-90 -mt-[18px] md:-mt-[14px] text-lg md:text-2xl -mr-[9px]">
-                Filter
-              </h1>
-            </button>
+                    {shouldOpenFilter(i) ? (
+                      <Filter
+                        options={{ trait_type: el, values: filterOptions[el] }}
+                        onFilter={handleFiterCriteria}
+                        initialState={returnPreState(el)}
+                      />
+                    ) : null}
+                  </div>
+                );
+              })}
           </div>
-        )}
+        </div>
       </div>
       <div className="h-fit w-full bg-gallery">
         <Navbar />
@@ -318,7 +490,7 @@ function CollectionsPage() {
                       <div className="leftSide mr-4 w-[40%] h-full flex justify-center items-center relative">
                         <Image
                           className="modal-img h-[96%] w-[97%] ml-[10px]"
-                          src={currentOpenedNft.image}
+                          src={currentOpenedNft.media[0].thumbnail}
                           alt="col-icon"
                           height={200}
                           width={200}
@@ -395,7 +567,7 @@ function CollectionsPage() {
                           />
                         </div>
                         <div className="closet-Items scroll-bar  overflow-y-auto overflow-x-hidden h-[45%] w-full flex flex-wrap items-center justify-start md:relative ">
-                          {currentOpenedNft.attributes.map(
+                          {currentOpenedNft.rawMetadata.attributes.map(
                             (el: any, i: number) => {
                               return (
                                 <div className="closet-item " key={i}>
@@ -445,13 +617,13 @@ function CollectionsPage() {
           </div>
         </div>
       </div>
-      <div className="absolute top-[42%] h-fit w-full flex flex-col justify-center bg-gallery items-center">
+      <div className="absolute top-1/2 h-fit w-full flex flex-col justify-center bg-gallery items-center">
         <div className="hexagon-collection-gallery h-max pt-10 md:pt-0 overflow-x-hidden  overflow-y-hidden pb-28">
           {currentItems &&
             currentItems.map((el: any, i: number) => {
               return (
                 <div
-                  className="tile inline-block ml-[13%] w-fit mt-[50px] rotate-[150deg]"
+                  className="tile inline-block ml-[13%] w-fit mt-[50px] rotate-[150deg] cursor-pointer"
                   key={i}
                   onClick={() => handleClick(i)}
                 >
@@ -461,9 +633,10 @@ function CollectionsPage() {
                               after:bg-inherit after:absolute after:left-0 after:content-none after:rotate-[60deg] before:rotate-[60deg]"
                   >
                     <img
-                      src={el.image}
+                      src={el.media[0].thumbnail}
                       alt=""
                       className="collection-page-img"
+                      loading="lazy"
                     />
                     <div>
                       <img
@@ -473,7 +646,7 @@ function CollectionsPage() {
                       />
                     </div>
                     <p className="collection-page-number absolute z-50 text-lg xl:text-3xl 2xl:mt-2">
-                      {`#${el.name.split("#")[1]}`}
+                      {`#${el.title.split("#")[1]}`}
                     </p>
                   </div>
                 </div>
