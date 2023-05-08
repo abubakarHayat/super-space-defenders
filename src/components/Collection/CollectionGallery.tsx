@@ -46,64 +46,18 @@ let TRAITS: any = [
   {
     trait_type: "Faction",
     value: [],
-    // value: ["Citizen", "Elite", "Rebel", "Titanides", "Cult"],
   },
   {
     trait_type: "Family",
     value: [],
-    // value: [
-    //   "None",
-    //   "Ishikawa",
-    //   "Takahashi",
-    //   "Kobayashi",
-    //   "Tenebris",
-    //   "Yamamoto",
-    // ],
   },
   {
     trait_type: "Origin",
     value: [],
-    // value: ["Callisto", "Europa", "Ganymede", "Mars", "Earth", "Venus"],
   },
   {
     trait_type: "Background",
     value: [],
-    // value: [
-    //   "Purlple",
-    //   "Grey",
-    //   "Blue",
-    //   "Peace",
-    //   "Green Peace",
-    //   "Back to Black",
-    //   "Green",
-    //   "New Hope",
-    //   "Red",
-    //   "Cotton Candy",
-    //   "Dark Matter",
-    //   "Abandonware",
-    //   "Jungle",
-    //   "Leafshine",
-    //   "Yellow",
-    //   "Darkshine",
-    //   "Dusk",
-    //   "City of Stars",
-    //   "Moonshine",
-    //   "Sunshine",
-    //   "Love Song",
-    //   "Vaporwave",
-    //   "Lava",
-    //   "Lost Planet",
-    //   "Mountains",
-    //   "Full Moon",
-    //   "Redwave",
-    //   "Starry Night",
-    //   "Black Hole",
-    //   "Heart",
-    //   "Bloody Moon",
-    //   "Outer Space",
-    //   "Old Magazine",
-    //   "Cabin",
-    // ],
   },
   { trait_type: "Equipment", value: [] },
   { trait_type: "Hair", value: [] },
@@ -117,7 +71,12 @@ let TRAITS: any = [
   { trait_type: "Mouth", value: [] },
   { trait_type: "Clothes", value: [] },
 ];
-
+const itemsPerPageOptions = [
+  { value: 10 },
+  { value: 20 },
+  { value: 30 },
+  { value: 50 },
+];
 function CollectionsPage() {
   const [message, setMessage] = useState("");
 
@@ -147,7 +106,9 @@ function CollectionsPage() {
     setOpenModal(true);
   };
 
-  const itemsPerPage: number = 10;
+  const [itemsPerPage, setItemsPerPage] = useState<number>(
+    itemsPerPageOptions[0].value
+  );
 
   useEffect(() => {
     const getNfts = async () => {
@@ -198,7 +159,7 @@ function CollectionsPage() {
     };
 
     getNfts();
-  }, [itemOffset, nfts]);
+  }, [itemOffset, nfts, itemsPerPage]);
 
   // Invoke when user click to request another page.
   const handlePageClick = (event: any) => {
@@ -225,6 +186,7 @@ function CollectionsPage() {
   const handleFiterCriteria = (search: any) => {
     let toReplace = { ...filterCriteria };
 
+    // If no trait is selected or deselected
     if (search.values.length === 0) {
       delete toReplace[search.trait_type];
     } else {
@@ -474,6 +436,25 @@ function CollectionsPage() {
                 />
               </div>
             </div>
+            <div className="">
+              <label
+                htmlFor="selector-items-per-page"
+                className="block mb-2 text-sm font-medium text-white"
+              >
+                Items per Page
+              </label>
+              <select
+                id="selector-items-per-page"
+                onChange={(e) => setItemsPerPage(+e.target.value)}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              >
+                {itemsPerPageOptions.map((el, i) => (
+                  <option key={i} value={el.value}>
+                    {el.value}
+                  </option>
+                ))}
+              </select>
+            </div>
 
             <div className="collection-gallery overflow-auto">
               {openModal && (
@@ -618,7 +599,13 @@ function CollectionsPage() {
         </div>
       </div>
       <div className="absolute top-1/2 h-fit w-full flex flex-col justify-center bg-gallery items-center">
-        <div className="hexagon-collection-gallery h-max pt-10 md:pt-0 overflow-x-hidden  overflow-y-hidden pb-28">
+        <div
+          className={
+            currentItems && currentItems.length > 1
+              ? "hexagon-collection-gallery h-max pt-10 md:pt-0 overflow-x-hidden overflow-y-hidden pb-28"
+              : "hexagon-collection-gallery h-max pt-10 md:pt-0 overflow-x-hidden overflow-y-hidden pb-28 pr-16"
+          }
+        >
           {currentItems &&
             currentItems.map((el: any, i: number) => {
               return (

@@ -1,128 +1,202 @@
+import { useState } from "react";
 import Image from "next/image";
+import Navbar from "../Navbar";
 import bg from "../../../public/Rectangle12.png";
 
 function CollectionLucifer() {
+  const [modalValue, setModalValue] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleDecrease = () => {
+    if (modalValue > 0) {
+      setModalValue(modalValue - 1);
+    }
+  };
+  const handleIncrease = () => {
+    setModalValue(modalValue + 1);
+  };
+  const handleModalState = () => {
+    setModalOpen(!modalOpen);
+  };
   return (
     <div
-      className="w-full h-screen relative overflow-hidden"
+      className="w-full relative overflow-y-hidden"
       style={{
         background: `url(${bg.src})`,
         backgroundSize: "cover",
         backgroundPosition: "right",
       }}
     >
-      <div className=" w-12/12 h-full flex justify-center items-start mt-14 2xl:mt-9">
-        <div className="w-4/5 h-[78%] md:h-[75%] lg:h-[70%] mb-12 flex justify-end z-30 ">
-          <div className="lg:w-[70%] lg:2/4 xl:w-[60%] bg-black bg-opacity-30 h-full overflow-y-scroll  scroll-bar flex flex-col justify-between">
-            <div className="mb-5 md:mb-2 2xl:mb-7 md:h-[95%] lg:h-auto 2xl:h-[95%] flex flex-col justify-between">
-              <div>
-                <h1 className="font-bugfast text-2xl  sm:text-2xl xl:text-4xl 2xl:text-5xl  3xl:text-12xl text-white mt-2 mb-2  ">
-                  PROJECT LUCIFER
-                </h1>
-                <Image
-                  className="w-5/5"
-                  src="/gallery-pfp-details-bar-white.png"
-                  alt="col-icon"
-                  height={1000}
-                  width={1000}
-                />
-                <p className="w-full mt-2 text-lg  md:text-xl lg:mt-6">
-                  {" "}
-                  <span className="font-bold">Project Lucfer </span> is
-                  comprised of 6,666 Cloned Individuals. They share the same
-                  universe of Super Space Defenders, facing the same challenges
-                  and opportunities for new adventures.
-                </p>
-                <ol className="list-[square] ml-10 text-white text-lg   md:text-xl ">
-                  <li className="mt-3 xl:mt-4 font-light">
-                    Lucifers share most of the Super Space Defenders benefits.
-                  </li>
-                  <li className="mt-3 xl:mt-4 font-light">
-                    Just like SSD, youll have access to exclusive
-                    community-focused events such as NFT Drops, Lore Building
-                    Activities, and more!.
-                  </li>
-                  <li className="mt-3 xl:mt-4 font-light">
-                    Access to the{" "}
-                    <span className="font-bold">
-                      {" "}
-                      &ldquo; Defenders Arcade &rdquo;{" "}
-                    </span>
-                  </li>
-                  <li className="mt-3 xl:mt-4 font-light">
-                    Increasing your Multiplier during major Airdrops/Launches if
-                    owning a Capsule or Defender..
-                  </li>
-                  <li className="mt-3 xl:mt-4 font-light">
-                    Admission to participate in our upcoming{" "}
-                    <span className="font-bold">
-                      {" "}
-                      &ldquo; Crafting &rdquo; & &ldquo; Economy Systems &rdquo;{" "}
-                    </span>
-                  </li>
-                  <li className="mt-3 xl:mt-4 font-light">
-                    Exclusive holder only bonuses in upcoming product campaign.
-                  </li>
-                </ol>
-              </div>
+      <Navbar />
 
-              <div className="flex justify-center items-center 2xl:mt-16 mt-7 md:mt-4 lg md:mb-9 lg:mb-4 lg:mt-5 2xl:mb-0 2xl:mt-7 :mt-4  ">
-                <div className="w-full flex flex-col justify-around items-center md:flex-row 2xl:w-[85%]">
-                  <Image
-                    src="/opensea-logo-white-01 1.png"
-                    className="mt-2 md:mt-0"
-                    alt="blyr-logo"
-                    height={65}
-                    width={65}
-                  />
-                  <div className="cap-1 w-60 h-10  md:h-12 mt-5 md:mt-0 xl:h-14 xl:w-60 bg-red-800 capsule flex items-center justify-center lg:mt-0 font-light">
-                    <button className=" text-white w-56 text-xl">
-                      View Gallery
-                    </button>
-                  </div>
-                  <div className="cap-1 w-60 h-10 md:h-12  xl:h-14 mt-5 md:mt-0 xl:w-60 bg-red-800 capsule flex items-center justify-center lg:mt-0 text-lg  2xl:text-2xl font-light">
-                    <button className=" text-white w-56 text-xl">
-                      MINT SPACE DEFENDER
-                    </button>
-                  </div>
-                </div>
-              </div>
+      <Image
+        className="hidden lg:block absolute 2xl:left-64 xl:left-40 lg:left-16"
+        src="/ssd-char-06.png"
+        alt="sdd character"
+        height={1000}
+        width={500}
+      />
 
-              <p className="flex justify-center w-full text-xs md:text-sm 2xl:text-lg font-semibold mt-4">
-                1035 COLLECTIBLES | 680 OWNERS | 26% UNIQUE OWNERS | 500 ETH
-                TOTAL VOLUME
-              </p>
+      <div className="main-content flex flex-col mt-10 text-white">
+        <div className="content-text z-20 self-center flex flex-col mx-6 lg:self-end lg:w-5/12 lg:mr-36">
+          <div className="heading mb-10">
+            <h1 className="font-bugfast text-2xl md:text-4xl xl:text-5xl">
+              {" "}
+              SUPER SPACE DEFENDERS
+            </h1>
+            <div className="relative w-full h-3">
+              <Image
+                src="/gallery-pfp-details-bar-white.png"
+                alt="details bar"
+                fill
+              />
             </div>
+          </div>
+          <div className="text-lg">
+            <strong>Project Lucifer</strong> is comprised of 6,666 Cloned
+            Individuals. They share the same universe of Super Space Defenders,
+            facing the same challenges and opportunities for new adventures.
+            <ul className="mt-5" style={{ listStyle: "square" }}>
+              <li className="mt-5">
+                Lucifers share most of the Super Space Defenders benefits.
+              </li>
+              <li className="mt-5">
+                Just like SSD, you&apos;ll have access to exclusive
+                community-focused events such as NFT Drops, Lore Building
+                Activities, and more!{" "}
+              </li>
+              <li className="mt-5">
+                Access to <strong>Defender&apos;s Arcade</strong>
+              </li>
+              <li className="mt-5">
+                Increasing your Multiplier during major Airdrops/Launches if
+                owning a Capsule or Defender.
+              </li>
+              <li className="mt-5">
+                Admission to participate in our upcoming{" "}
+                <strong>&ldquo;Crafting&rdquo;</strong> &{" "}
+                <strong>&ldquo;Economy&rdquo;</strong>
+                Systems.
+              </li>
+              <li className="mt-5">
+                Exclusive holder only bonuses in upcoming product campaign.
+              </li>
+            </ul>
+          </div>
+          <div className="btn-section self-center mt-5 flex flex-col gap-y-2 md:flex-row w-full md:w-2/3 lg:w-full justify-around items-center">
+            <div className="relative h-10 w-10 xl:h-16 xl:w-16">
+              <Image src="/opensea-logo-white-01.png" alt="opensea logo" fill />
+            </div>
+            <button className="bg-[#FF0000] px-5 w-52 btn-con-wallet h-10 lg:h-10 xl:h-14">
+              VIEW GALLERY
+            </button>
+            <button
+              className="bg-[#FF0000] px-5 w-52 btn-con-wallet h-10 lg:h-10 xl:h-14"
+              onClick={handleModalState}
+            >
+              MINT SPACE DEFENDER
+            </button>
+          </div>
+          <div className="mt-5 font-bold text-center">
+            1,530 COLLECTIBLES | 680 OWNERS | 26% UNIQUE OWNERS | 500 ETH TOTAL
+            VOLUME
           </div>
         </div>
       </div>
-
-      <div className="md:w-4/6  lg:w-auto absolute top-10 h-[100%] lg:ml-[2%] xl:ml-[10%] z-0 2xl:ml-[17%] ">
-        <Image
-          className="h-[98%] z-0 2xl:h-[90%]"
-          src="/ssd-char-06.png"
-          alt="col-icon"
-          height={700}
-          width={500}
-        />
-      </div>
-      <div
-        className="char-list flex  w-full overflow-x-scroll absolute bottom-0 h-[15%] md:h-[20%] lg:h-[23%] xl:h-[25%] scroll-bar"
-        style={{ background: "rgba(0,0,0,0.5)" }}
-      >
-        {[...Array(1000)].map((_, i) => {
+      <div className="char-list flex overflow-x-scroll mt-10 w-full">
+        {[...Array(9)].map((_, i) => {
           return (
             <Image
               key={i}
-              className="object-cover mt-5 w-full"
-              src={`/Boy${(i % 9) + 2}.png`}
+              className="object-cover"
+              src={`/lucifer-collection/lucifer-pfp-0${i + 1}.png`}
               alt="pfp"
-              height={150}
-              width={1000}
+              height={220}
+              width={220}
             />
           );
         })}
       </div>
+
+      {/* ----------------------- modal ------------------------- */}
+      {modalOpen && (
+        <div className="flex justify-center z-30 relative">
+          <Image
+            src="/vector3.png"
+            alt=""
+            className="w-[90%] h-[40%] md:h-[43%] fixed top-[150px] bg-trasparent opacity-90 sm:w-3/4 md:w-[60%] lg:w-2/4 xl:w-[40%] 2xl:w-[30%]"
+            height={1000}
+            width={1000}
+          />
+
+          <div className="modal-content flex justify-start items-center flex-col overflow-hidden h-[40%] md:h-[43%] w-[90%] fixed top-[150px]  z-20 sm:w-3/4 md:w-[60%] lg:w-2/4 xl:w-[40%] 2xl:w-[30%]">
+            <button
+              className="absolute right-2 top-3 rotate-[60deg] sm:top-6 sm:right-1 font-bugfast text-white"
+              onClick={handleModalState}
+            >
+              Close
+            </button>
+            <h1 className="font-bugfast text-md md:text-2xl mt-10">
+              Mint Lucifer
+            </h1>
+            <div className="h-[65%] w-[80%]  flex justify-center items-start mt-5">
+              <div className="w-2/4 h-full flex justify-center items-center">
+                <Image
+                  src="/lucifer-collection/lucifer-pfp-01.png"
+                  alt=""
+                  className="h-full w-[92%] rounded-lg"
+                  height={1000}
+                  width={1000}
+                />
+              </div>
+              <div className="w-2/4 h-full flex flex-col items-center justify-between ">
+                <div className="h-3/4 overflow-auto scroll-bar">
+                  <p className="text-sm">
+                    Mint your Lucifers and join either the Elites, Rebels, or
+                    Citizens.
+                  </p>
+                </div>
+                <div className=" w-full flex justify-between flex-col">
+                  <h6 className="text-white mt-2 mb-1 text-sm font-semibold ">
+                    2,914 / 4,444 AVAILABLE
+                  </h6>
+                  <div className=" flex justify-center w-full h-[50%]">
+                    <div className=" w-1/3  flex justify-between">
+                      <div className="w-[60%] bg-white flex justify-center items-center text-lg">
+                        {modalValue}
+                      </div>
+                      <div className="w-[37%] flex flex-col justify-between">
+                        <button
+                          className="h-[47%] bg-white"
+                          onClick={handleIncrease}
+                        >
+                          +
+                        </button>
+                        <button
+                          className="h-[47%] bg-white"
+                          onClick={handleDecrease}
+                        >
+                          -
+                        </button>
+                      </div>
+                    </div>
+                    <div className="h-full w-2/3 flex items-center justify-center relative">
+                      <Image
+                        className="w-[90%] h-full"
+                        src="/vector1.png"
+                        alt="pfp"
+                        height={100}
+                        width={100}
+                      />
+                      <p className="absolute text-white text-2xl">MINT</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
