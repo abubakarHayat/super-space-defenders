@@ -1,20 +1,48 @@
 import { useState } from "react";
 import Image from "next/image";
+import { useContractWrite, usePrepareContractWrite, useAccount } from "wagmi";
+import ssdAbi from "../../abi/ssd-abi.json";
 
 import Navbar from "../Navbar";
 import bg from "../../../public/Rectangle12.png";
+import { toast } from "react-toastify";
 
 function CollectionDetail() {
-  const [modalValue, setModalValue] = useState(0);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [mintValue, setMintValue] = useState<number>(1);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const { address, connector, isConnected } = useAccount();
+  const { config, error } = usePrepareContractWrite({
+    address: "0x6ea26EcDe564df85d4C631e041Ff7630296B08b8",
+    abi: ssdAbi,
+    functionName: "mintToken",
+    args: [mintValue],
+    account: address,
+    onSuccess(data) {
+      toast.success("Success!");
+      console.log("Success", data);
+    },
+    onError(error) {
+      toast.error("Error in Minting!");
+      console.log("Error", error);
+    },
+    onSettled(data, error) {
+      console.log("Settled", { data, error });
+    },
+  });
+  const { write } = useContractWrite(config);
 
+  const handleMint = () => {
+    write?.();
+  };
   const handleDecrease = () => {
-    if (modalValue > 0) {
-      setModalValue(modalValue - 1);
+    if (mintValue > 1) {
+      setMintValue((prevState: number) => prevState - 1);
     }
   };
   const handleIncrease = () => {
-    setModalValue(modalValue + 1);
+    if (mintValue < 5) {
+      setMintValue((prevState: number) => prevState + 1);
+    }
   };
   const handleModalState = () => {
     setModalOpen(!modalOpen);
@@ -101,7 +129,7 @@ function CollectionDetail() {
           </div>
         </div>
       </div>
-      <div className="char-list flex overflow-x-scroll mt-10">
+      <div className="char-list flex overflow-x-scroll mt-10 relative">
         {[...Array(12)].map((_, i) => {
           if (i > 8) {
             return (
@@ -173,7 +201,7 @@ function CollectionDetail() {
                   <div className=" flex justify-center w-full h-[50%]">
                     <div className=" w-1/3  flex justify-between">
                       <div className="w-[60%] bg-white flex justify-center items-center text-lg">
-                        {modalValue}
+                        {mintValue}
                       </div>
                       <div className="w-[37%] flex flex-col justify-between">
                         <button
@@ -190,7 +218,10 @@ function CollectionDetail() {
                         </button>
                       </div>
                     </div>
-                    <div className="h-full w-2/3 flex items-center justify-center relative">
+                    <div
+                      className="h-full w-2/3 flex items-center justify-center relative cursor-pointer"
+                      onClick={handleMint}
+                    >
                       <Image
                         className="w-[90%] h-full"
                         src="/vector1.png"

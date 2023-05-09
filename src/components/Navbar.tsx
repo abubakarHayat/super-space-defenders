@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useConnect, useDisconnect, useAccount } from "wagmi";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -17,9 +17,15 @@ function Navbar() {
 
   const connectWallet = async () => {
     try {
-      if (pendingConnector !== undefined) {
-        toast.error("Wallet ");
-      }
+      console.log("isLoading: ", isLoading);
+      console.log("connector:", connector);
+      console.log("connectors: ", connectors);
+      console.log("pendingConnector: ", pendingConnector);
+      // if (isLoading && connector && connector.id === pendingConnector?.id) {
+      //   console.log("PC: ", pendingConnector);
+      //   toast.error("Connecting");
+      //   return;
+      // }
       if (connectors[0].ready) {
         if (isConnected) {
           disconnect();
@@ -27,20 +33,24 @@ function Navbar() {
           toast.success("Wallet disconnected!");
         } else {
           connect({ connector: connectors[0] });
-          setConText("DISCONNECT WALLET");
-          toast.success("Wallet connected!");
+
+          if (isLoading) {
+            toast.warn("Connecting wallet!");
+          } else {
+            setConText("DISCONNECT WALLET");
+            toast.success("Wallet connected!");
+          }
         }
       } else {
         toast.error("Wallet not found!");
       }
-      console.log(error);
-      console.log(address);
     } catch (error) {
       console.log("H", error);
     }
   };
   return (
     <>
+      <ToastContainer />
       <nav className="hidden lg:flex w-5/6 mx-auto h-32 justify-between items-center">
         <div>
           <Image
@@ -84,8 +94,9 @@ function Navbar() {
             </li>
             <li className="text-xl lg:text-sm xl:text-xl text-white">
               <button
-                className="bg-red-500 px-5 xl:w-50 btn-con-wallet h-14 lg:h-10 xl:h-14"
+                className="bg-red-500 px-5 xl:w-50 btn-con-wallet h-14 lg:h-10 xl:h-14 disabled:bg-slate-600"
                 onClick={connectWallet}
+                disabled={isLoading}
               >
                 {conText}
               </button>
@@ -175,15 +186,15 @@ function Navbar() {
           </li>
           <li className="text-md text-white">
             <button
-              className="bg-red-500 w-44 btn-con-wallet h-10"
+              className="bg-red-500 w-44 btn-con-wallet h-10 disabled:bg-slate-600"
               onClick={connectWallet}
+              disabled={isLoading}
             >
               {conText}
             </button>
           </li>
         </ul>
       </nav>
-      <ToastContainer />
     </>
   );
 }

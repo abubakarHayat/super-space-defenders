@@ -103,7 +103,7 @@ function CollectionLucifer() {
           </div>
         </div>
       </div>
-      <div className="char-list flex overflow-x-scroll mt-10 w-full">
+      <div className="char-list flex overflow-x-scroll mt-10 w-full relative">
         {[...Array(9)].map((_, i) => {
           return (
             <Image

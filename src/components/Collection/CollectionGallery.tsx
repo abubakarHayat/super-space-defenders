@@ -129,7 +129,7 @@ function CollectionsPage() {
 
           const endOffset = itemOffset + itemsPerPage;
           console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-          toast("Loading NFTs collection!");
+
           setCurrentItems(rezz.nfts.slice(itemOffset, endOffset));
           setPageCount(Math.ceil(rezz.nfts.length / itemsPerPage));
 
@@ -149,7 +149,7 @@ function CollectionsPage() {
         } else {
           const endOffset = itemOffset + itemsPerPage;
           console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-          toast("Loading NFTs collection!");
+
           setCurrentItems(nfts.slice(itemOffset, endOffset));
           setPageCount(Math.ceil(nfts.length / itemsPerPage));
         }
