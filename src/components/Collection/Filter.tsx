@@ -56,7 +56,7 @@ const Filter = ({ options, onFilter, initialState }: any) => {
               <div className="flex items-center mb-4">
                 <label
                   htmlFor={`nft-checkbox-${i}`}
-                  className="ml-2 text-white text-lg font-medium dark:text-gray-300"
+                  className="ml-2 text-white text-sm md:text-lg font-medium dark:text-gray-300"
                 >
                   {capitalize(el)}
                 </label>
@@ -66,7 +66,7 @@ const Filter = ({ options, onFilter, initialState }: any) => {
                   checked={checked.values.includes(capitalize(el))}
                   onChange={() => handleChecked(i)}
                   value=""
-                  className="w-5 h-5 ml-auto bg-slate-900 accent-red-500"
+                  className=" w-4 h-4 md:w-5 md:h-5 ml-auto bg-slate-900 accent-red-500"
                 />
               </div>
             </li>

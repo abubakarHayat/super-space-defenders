@@ -78,8 +78,6 @@ const itemsPerPageOptions = [
   { value: 50 },
 ];
 function CollectionsPage() {
-  const [message, setMessage] = useState("");
-
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
   const [itemOffset, setItemOffset] = useState(0);
@@ -93,11 +91,12 @@ function CollectionsPage() {
   const [openFilter, setOpenFilter] = useState<any>([]);
   const [filterOptions, setFilterOptions] = useState<any | null>(null);
   const [filterCriteria, setFilterCriteria] = useState<any>({});
-  const handleChange = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setMessage(event.target.value);
-  };
+  const [searchInput, setSearchInput] = useState<string>("");
+  // const handleChange = (event: {
+  //   target: { value: React.SetStateAction<string> };
+  // }) => {
+  //   setMessage(event.target.value);
+  // };
   const address = "0x6ea26ecde564df85d4c631e041ff7630296b08b8";
   const [currentOpenedNft, setCurrentOpenedNft] = useState<any | null>(TRAITS);
   const filter = () => {};
@@ -120,18 +119,18 @@ function CollectionsPage() {
             network: Network.ETH_MAINNET,
           };
           const alchemy = new Alchemy(config);
-          const rezz = await alchemy.nft.getNftsForContract(address, {
+          const nftRes = await alchemy.nft.getNftsForContract(address, {
             omitMetadata: false,
           });
-          setNfts(rezz.nfts);
+          setNfts(nftRes.nfts);
 
-          setTotalNfts(rezz.nfts);
+          setTotalNfts(nftRes.nfts);
 
           const endOffset = itemOffset + itemsPerPage;
           console.log(`Loading items from ${itemOffset} to ${endOffset}`);
 
-          setCurrentItems(rezz.nfts.slice(itemOffset, endOffset));
-          setPageCount(Math.ceil(rezz.nfts.length / itemsPerPage));
+          setCurrentItems(nftRes.nfts.slice(itemOffset, endOffset));
+          setPageCount(Math.ceil(nftRes.nfts.length / itemsPerPage));
 
           // GET SSD MetaData for Filter
           const openseaRes = await fetch(
@@ -143,7 +142,7 @@ function CollectionsPage() {
               } as HeadersInit,
             }
           );
-          const filterOps = (await openseaRes.json()).collection.traits;
+          const filterOps = (await openseaRes.json())?.collection.traits;
 
           setFilterOptions(filterOps);
         } else {
@@ -181,6 +180,34 @@ function CollectionsPage() {
       // not found
       setOpenFilter((prevState: any) => [...prevState, i]);
     }
+  };
+
+  const handleSearch = (e: any) => {
+    let searchStr = e.target.value.toLowerCase();
+    setSearchInput(e.target.value);
+    let nftSize = totalNfts.length;
+
+    let searchedNfts = [];
+    //begin search
+    for (let currNft = 0; currNft < nftSize; currNft++) {
+      let nft = totalNfts[currNft];
+      let title = nft.title.toLowerCase();
+      //search for name or ID
+      if (title.includes(searchStr)) {
+        searchedNfts.push(nft);
+      } else {
+        //search for traits
+        let traits = nft.rawMetadata.attributes;
+        let traitSize = traits.length;
+        for (let currTrait = 0; currTrait < traitSize; currTrait++) {
+          let trait = traits[currTrait].value.toLowerCase();
+          if (trait === searchStr) {
+            searchedNfts.push(nft);
+          }
+        }
+      }
+    }
+    setNfts(searchedNfts);
   };
 
   const handleFiterCriteria = (search: any) => {
@@ -281,65 +308,65 @@ function CollectionsPage() {
   return (
     <div className="collection-pg max-h-fit">
       <ToastContainer />
-      <div className="h-2/3 md:h-4/5 w-fit left-0 fixed top-[17%] md:top-[13%] z-10">
-        <div
-          className={
-            openMenu
-              ? "h-full w-full relative"
-              : "h-full w-full relative -left-[89%]"
-          }
+
+      <div
+        className={
+          openMenu
+            ? "h-4/5 w-72 sm:w-80 md:w-96 left-0 top-[15%] fixed z-10"
+            : "h-4/5 w-72 sm:w-80 md:w-96 -left-[255px] sm:-left-[284px] md:-left-[340px] top-[15%] fixed z-10"
+        }
+      >
+        <Image
+          src="/Filter Bar Shape.png"
+          alt=""
+          className="w-full h-full "
+          height={1000}
+          width={1000}
+        />
+        <button
+          onClick={() => setOpenMenu(!openMenu)}
+          className="absolute top-[43%] right-0  w-[40px] h-[89px]  lg:top-[43.2%] lg:h-[105px]"
         >
-          <Image
-            src="/Filter Bar Shape.png"
-            alt=""
-            className="w-full h-full "
-            height={1000}
-            width={1000}
-          />
-          <button
-            onClick={() => setOpenMenu(!openMenu)}
-            className="absolute top-[43%] right-0  w-[40px] h-[89px]  lg:top-[43.2%] lg:h-[105px]"
-          >
-            <h1 className="absolute top-[49%] right-1 rotate-90 -mt-[18px] md:-mt-[14px] text-sm md:text-lg lg:text-2xl -mr-[9px]">
-              Filter
-            </h1>
-          </button>
-          <div className=" w-[83%] h-[91%] scroll-bar absolute top-7 overflow-auto  pl-3">
-            {filterOptions &&
-              Object.keys(filterOptions).map((el: any, i: number) => {
-                return (
-                  <div key={i}>
-                    <div className="content-item my-2">
-                      <h1 className="text-sm md:text-xl lg:text-2xl text-white">
-                        {el}
-                      </h1>
-                      <div
-                        className="rightContent flex w-[56px] "
-                        onClick={() => handleOpenFilter(i)}
-                      >
-                        <p className="text-white">33</p>
-                        <Image
-                          src="/inv.png"
-                          className={shouldOpenFilter(i) ? "rotate-180" : ""}
-                          alt="col-icon"
-                          height={20}
-                          width={25}
-                        />
-                      </div>
-                    </div>
-                    {shouldOpenFilter(i) ? (
-                      <Filter
-                        options={{ trait_type: el, values: filterOptions[el] }}
-                        onFilter={handleFiterCriteria}
-                        initialState={returnPreState(el)}
+          <h1 className="absolute top-[49%] right-1 rotate-90 -mt-[18px] md:-mt-[14px] text-sm md:text-lg lg:text-2xl -mr-[9px]">
+            Filter
+          </h1>
+        </button>
+        <div className=" w-[83%] h-[91%] scroll-bar absolute top-7 overflow-auto pl-3">
+          {filterOptions &&
+            Object.keys(filterOptions).map((el: any, i: number) => {
+              return (
+                <div key={i}>
+                  <div className="content-item my-2">
+                    <h1 className="text-md font-normal md:text-xl lg:text-2xl text-white">
+                      {el}
+                    </h1>
+                    <div
+                      className="rightContent flex w-[56px] "
+                      onClick={() => handleOpenFilter(i)}
+                    >
+                      <p className="text-white">33</p>
+                      <Image
+                        src="/inv.png"
+                        className={shouldOpenFilter(i) ? "rotate-180" : ""}
+                        alt="col-icon"
+                        height={20}
+                        width={25}
                       />
-                    ) : null}
+                    </div>
                   </div>
-                );
-              })}
-          </div>
+                  {shouldOpenFilter(i) ? (
+                    <Filter
+                      options={{ trait_type: el, values: filterOptions[el] }}
+                      onFilter={handleFiterCriteria}
+                      initialState={returnPreState(el)}
+                    />
+                  ) : null}
+                </div>
+              );
+            })}
         </div>
       </div>
+
       <div className="h-fit w-full bg-gallery">
         <Navbar />
         <div className="main-collection flex flex-col items-center mt-20 ">
@@ -361,11 +388,7 @@ function CollectionsPage() {
                   height={1000}
                   width={1000}
                 />
-                <button
-                  onClick={() => {
-                    alert(message);
-                  }}
-                >
+                <button>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -383,9 +406,9 @@ function CollectionsPage() {
                 </button>
                 <input
                   name="myInput"
-                  className=" absolute left-14 top-2 lg:top-4 lg:left-16 bg-inherit   outline-0"
+                  className="absolute left-14 top-2 lg:top-4 lg:left-16 bg-inherit outline-0 pb-1 w-4/5"
                   placeholder="Search by name, ID, or trait"
-                  onChange={handleChange}
+                  onChange={handleSearch}
                 />
               </div>
               <div className="info-tabs flex space-x-10 md:space-x-5 md:justify-around col-span-3 lg:col-span-2 xl:col-span-1">
@@ -646,10 +669,10 @@ function CollectionsPage() {
           pageLinkClassName="p-5"
           breakLabel="..."
           nextLabel={
-            <span className="border-white border-2 rounded-full p-2">Next</span>
+            <span className="border-white border-2 rounded-2xl p-2">Next</span>
           }
           previousLabel={
-            <span className="border-white border-2 rounded-full p-2">
+            <span className="border-white border-2 rounded-2xl p-2">
               Previous
             </span>
           }

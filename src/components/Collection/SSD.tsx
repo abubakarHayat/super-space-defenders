@@ -1,22 +1,27 @@
 import { useState } from "react";
 import Image from "next/image";
-import { useContractWrite, usePrepareContractWrite, useAccount } from "wagmi";
+import { useContractWrite, usePrepareContractWrite } from "wagmi";
 import ssdAbi from "../../abi/ssd-abi.json";
 
 import Navbar from "../Navbar";
 import bg from "../../../public/Rectangle12.png";
 import { toast } from "react-toastify";
+import { parseEther } from "ethers/lib/utils.js";
+
+const SSD_VAL: number = 0.07;
 
 function CollectionDetail() {
+  const [totalValue, setTotalValue] = useState<number>(SSD_VAL);
   const [mintValue, setMintValue] = useState<number>(1);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const { address, connector, isConnected } = useAccount();
-  const { config, error } = usePrepareContractWrite({
+  const { config } = usePrepareContractWrite({
     address: "0x6ea26EcDe564df85d4C631e041Ff7630296B08b8",
     abi: ssdAbi,
     functionName: "mintToken",
     args: [mintValue],
-    account: address,
+    overrides: {
+      value: parseEther(totalValue.toString()),
+    },
     onSuccess(data) {
       toast.success("Success!");
       console.log("Success", data);
@@ -29,19 +34,33 @@ function CollectionDetail() {
       console.log("Settled", { data, error });
     },
   });
-  const { write } = useContractWrite(config);
+  const { writeAsync } = useContractWrite(config);
 
-  const handleMint = () => {
-    write?.();
+  const handleMint = async () => {
+    try {
+      const tx = await writeAsync?.();
+      let reciept = tx?.wait();
+      console.log("Receipt: ", reciept);
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleDecrease = () => {
     if (mintValue > 1) {
-      setMintValue((prevState: number) => prevState - 1);
+      setMintValue((prevState: number) => {
+        let t_val = Math.round(SSD_VAL * (prevState - 1) * 1e12) / 1e12;
+        setTotalValue(t_val);
+        return prevState - 1;
+      });
     }
   };
   const handleIncrease = () => {
     if (mintValue < 5) {
-      setMintValue((prevState: number) => prevState + 1);
+      setMintValue((prevState: number) => {
+        let t_val = Math.round(SSD_VAL * (prevState + 1) * 1e12) / 1e12;
+        setTotalValue(t_val);
+        return prevState + 1;
+      });
     }
   };
   const handleModalState = () => {

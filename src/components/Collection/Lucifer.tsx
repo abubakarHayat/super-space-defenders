@@ -1,21 +1,72 @@
 import { useState } from "react";
 import Image from "next/image";
+import { usePrepareContractWrite, useContractWrite } from "wagmi";
+import { parseEther } from "ethers/lib/utils.js";
+import luciferAbi from "../../abi/lucifer-abi.json";
+
+import { toast } from "react-toastify";
 import Navbar from "../Navbar";
 import bg from "../../../public/Rectangle12.png";
 
+const LUCIFER_VAL: number = 0.05;
+
 function CollectionLucifer() {
-  const [modalValue, setModalValue] = useState(0);
+  const [mintValue, setMintValue] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
+  const [totalValue, setTotalValue] = useState(LUCIFER_VAL);
+  const { config } = usePrepareContractWrite({
+    address: "0x3f5492798A65bb05F9Da37516BDb17540681A3B1",
+    abi: luciferAbi,
+    functionName: "mintToken",
+    args: [mintValue],
+    overrides: {
+      value: parseEther(totalValue.toString()),
+    },
+    onSuccess(data) {
+      toast.success("Success!");
+      console.log("Success", data);
+    },
+    onError(error) {
+      toast.error("Error in Minting!");
+      console.log("Error", error);
+    },
+    onSettled(data, error) {
+      console.log("Settled", { data, error });
+    },
+  });
+  const { writeAsync } = useContractWrite(config);
+
+  const handleMint = async () => {
+    try {
+      const tx = await writeAsync?.();
+      let reciept = tx?.wait();
+      console.log("Receipt: ", reciept);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleDecrease = () => {
-    if (modalValue > 0) {
-      setModalValue(modalValue - 1);
+    if (mintValue > 1) {
+      setMintValue((prevState: number) => {
+        let t_val = Math.round(LUCIFER_VAL * (prevState - 1) * 1e12) / 1e12;
+        setTotalValue(t_val);
+        return prevState - 1;
+      });
     }
   };
   const handleIncrease = () => {
-    setModalValue(modalValue + 1);
+    if (mintValue < 5) {
+      setMintValue((prevState: number) => {
+        let t_val = Math.round(LUCIFER_VAL * (prevState + 1) * 1e12) / 1e12;
+        setTotalValue(t_val);
+        return prevState + 1;
+      });
+    }
   };
   const handleModalState = () => {
+    console.log("TotalVal: ", totalValue);
+    console.log();
     setModalOpen(!modalOpen);
   };
   return (
@@ -163,7 +214,7 @@ function CollectionLucifer() {
                   <div className=" flex justify-center w-full h-[50%]">
                     <div className=" w-1/3  flex justify-between">
                       <div className="w-[60%] bg-white flex justify-center items-center text-lg">
-                        {modalValue}
+                        {mintValue}
                       </div>
                       <div className="w-[37%] flex flex-col justify-between">
                         <button
@@ -180,7 +231,10 @@ function CollectionLucifer() {
                         </button>
                       </div>
                     </div>
-                    <div className="h-full w-2/3 flex items-center justify-center relative">
+                    <div
+                      className="h-full w-2/3 flex items-center justify-center relative cursor-pointer"
+                      onClick={handleMint}
+                    >
                       <Image
                         className="w-[90%] h-full"
                         src="/vector1.png"

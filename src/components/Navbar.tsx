@@ -7,13 +7,35 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Navbar() {
-  const { connect, connectors, error, isLoading, pendingConnector } =
-    useConnect();
-  const { address, connector, isConnected } = useAccount();
-  const { disconnect } = useDisconnect();
-
   const [isOpen, setIsOpen] = useState(false);
   const [conText, setConText] = useState("CONNECT WALLET");
+  const { connect, connectors, error, isLoading, pendingConnector } =
+    useConnect({
+      onError(error, variables, context) {
+        console.log("on Error: (CON)", error, variables, context);
+      },
+      onSuccess(data, variables, context) {
+        setConText("DISCONNECT WALLET");
+        console.log("on Success: (CON)", data, variables, context);
+      },
+    });
+  const { address, connector, isConnected } = useAccount();
+  const { disconnect } = useDisconnect({
+    onError(error, context) {
+      console.log("on Error: (DIS)", error, context);
+    },
+    onSuccess(context) {
+      setConText("CONNECT WALLET");
+      console.log("onSuccess (DIS): ", context);
+    },
+  });
+
+  useEffect(() => {
+    console.log(address);
+    if (isConnected) {
+      setConText("DISCONNECT WALLET");
+    }
+  }, [address, isConnected]);
 
   const connectWallet = async () => {
     try {
@@ -21,15 +43,15 @@ function Navbar() {
       console.log("connector:", connector);
       console.log("connectors: ", connectors);
       console.log("pendingConnector: ", pendingConnector);
-      // if (isLoading && connector && connector.id === pendingConnector?.id) {
-      //   console.log("PC: ", pendingConnector);
-      //   toast.error("Connecting");
-      //   return;
-      // }
+      console.log("Address :", address);
+      if (error !== null) {
+        toast.error("An error occured. Please check your wallet!");
+        console.log("Error occured: ", error);
+        return;
+      }
       if (connectors[0].ready) {
         if (isConnected) {
           disconnect();
-          setConText("CONNECT WALLET");
           toast.success("Wallet disconnected!");
         } else {
           connect({ connector: connectors[0] });
@@ -37,7 +59,6 @@ function Navbar() {
           if (isLoading) {
             toast.warn("Connecting wallet!");
           } else {
-            setConText("DISCONNECT WALLET");
             toast.success("Wallet connected!");
           }
         }
