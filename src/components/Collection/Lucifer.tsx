@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { usePrepareContractWrite, useContractWrite } from "wagmi";
-import { parseEther } from "ethers/lib/utils.js";
+import { parseEther, formatBytes32String } from "ethers/lib/utils.js";
 import luciferAbi from "../../abi/lucifer-abi.json";
 
 import { toast } from "react-toastify";
@@ -18,7 +18,7 @@ function CollectionLucifer() {
     address: "0x3f5492798A65bb05F9Da37516BDb17540681A3B1",
     abi: luciferAbi,
     functionName: "mintToken",
-    args: [mintValue, ""],
+    args: [mintValue, [formatBytes32String("")]],
     overrides: {
       value: parseEther(totalValue.toString()),
     },
