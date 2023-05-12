@@ -18,7 +18,7 @@ function CollectionLucifer() {
     address: "0x3f5492798A65bb05F9Da37516BDb17540681A3B1",
     abi: luciferAbi,
     functionName: "mintToken",
-    args: [mintValue],
+    args: [mintValue, ""],
     overrides: {
       value: parseEther(totalValue.toString()),
     },
