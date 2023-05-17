@@ -84,6 +84,7 @@ function CollectionsPage() {
   const [itemOffset, setItemOffset] = useState(0);
   const [currentItems, setCurrentItems] = useState<any | null>(null);
   const [pageCount, setPageCount] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 
   const [openModal, setOpenModal] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
@@ -93,11 +94,7 @@ function CollectionsPage() {
   const [filterOptions, setFilterOptions] = useState<any | null>(null);
   const [filterCriteria, setFilterCriteria] = useState<any>({});
   const [searchInput, setSearchInput] = useState<string>("");
-  // const handleChange = (event: {
-  //   target: { value: React.SetStateAction<string> };
-  // }) => {
-  //   setMessage(event.target.value);
-  // };
+
   const address = "0x6ea26ecde564df85d4c631e041ff7630296b08b8";
   const [currentOpenedNft, setCurrentOpenedNft] = useState<any | null>(TRAITS);
   const filter = () => {};
@@ -298,6 +295,11 @@ function CollectionsPage() {
     return { trait_type: filterTrait, values: values };
   };
 
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setImageLoaded(false);
+  };
+
   return (
     <div className="collection-pg max-h-fit">
       <ToastContainer />
@@ -485,13 +487,19 @@ function CollectionsPage() {
                     />
                     <div className="modal-content flex justify-center overflow-hidden h-[70%] w-4/5 fixed top-[150px] m-auto ml-[20px] z-20 ">
                       <div className="leftSide mr-4 w-[40%] h-full flex justify-center items-center relative">
-                        <div className="relative w-[90%] h-[90%]">
+                        <div className="relative w-[90%] h-[90%] flex items-center justify-center">
                           <Image
                             className="modal-img w-full h-full"
-                            src={currentOpenedNft.media[0].thumbnail}
+                            src={currentOpenedNft.media[0].raw}
+                            onLoad={() => setImageLoaded(true)}
                             alt="col-icon"
                             fill
                           />
+                          {!imageLoaded && (
+                            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-500 to-pink-500 animate-spin">
+                              <div className="h-9 w-9 rounded-full bg-black"></div>
+                            </div>
+                          )}
                           <Image
                             className="absolute bottom-5 right-2 "
                             src="/opensea-logo-white-01 1.png"
@@ -504,7 +512,7 @@ function CollectionsPage() {
                       <div className="rightSide w-[48%] h-full flex flex-col justify-center items-start relative">
                         <h1
                           className="absolute top-6 cursor-pointer right-[0.51rem] lg:right-[0.50rem] xl:right-[0.60rem] text-xl lg:text-2xl font-bold rotate-[72deg] lg:rotate-[70deg] xl:rotate-[58deg] 2xl:rotate[61deg] 2xl:right-[0.75rem] md:right-[0.70rem] md:top-8 font-bugfast"
-                          onClick={() => setOpenModal(false)}
+                          onClick={handleCloseModal}
                         >
                           Close
                         </h1>
