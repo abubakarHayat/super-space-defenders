@@ -5,6 +5,7 @@ import { Alchemy, Network } from "alchemy-sdk";
 import ReactPaginate from "react-paginate";
 import { ToastContainer, toast } from "react-toastify";
 import Filter from "./Filter";
+import traitsJson from "../../utils/traits.json";
 
 import Navbar from "../Navbar";
 import collectionPicFrame from "../../../public/pfp-gallery-hex-boundary.png";
@@ -123,6 +124,7 @@ function CollectionsPage() {
             omitMetadata: false,
           });
           setNfts(nftRes.nfts);
+          console.log("Nfts: ", nftRes);
 
           setTotalNfts(nftRes.nfts);
 
@@ -132,17 +134,8 @@ function CollectionsPage() {
           setCurrentItems(nftRes.nfts.slice(itemOffset, endOffset));
           setPageCount(Math.ceil(nftRes.nfts.length / itemsPerPage));
 
-          // GET SSD MetaData for Filter
-          const openseaRes = await fetch(
-            "https://api.opensea.io/api/v1/collection/superspacedefenders",
-            {
-              method: "GET",
-              headers: {
-                "X-Api-Key": process.env.NEXT_PUBLIC_OPENSEA_API_KEY,
-              } as HeadersInit,
-            }
-          );
-          const filterOps = (await openseaRes.json())?.collection.traits;
+          //assign traits to filter
+          const filterOps = traitsJson.traits;
 
           setFilterOptions(filterOps);
         } else {
@@ -308,7 +301,6 @@ function CollectionsPage() {
   return (
     <div className="collection-pg max-h-fit">
       <ToastContainer />
-
       <div
         className={
           openMenu
@@ -409,6 +401,7 @@ function CollectionsPage() {
                   className="absolute left-14 top-2 lg:top-4 lg:left-16 bg-inherit outline-0 pb-1 w-4/5"
                   placeholder="Search by name, ID, or trait"
                   onChange={handleSearch}
+                  value={searchInput}
                 />
               </div>
               <div className="info-tabs flex space-x-10 md:space-x-5 md:justify-around col-span-3 lg:col-span-2 xl:col-span-1">
@@ -492,20 +485,21 @@ function CollectionsPage() {
                     />
                     <div className="modal-content flex justify-center overflow-hidden h-[70%] w-4/5 fixed top-[150px] m-auto ml-[20px] z-20 ">
                       <div className="leftSide mr-4 w-[40%] h-full flex justify-center items-center relative">
-                        <Image
-                          className="modal-img h-[96%] w-[97%] ml-[10px]"
-                          src={currentOpenedNft.media[0].thumbnail}
-                          alt="col-icon"
-                          height={200}
-                          width={200}
-                        />
-                        <Image
-                          className="absolute bottom-5 right-2 "
-                          src="/opensea-logo-white-01 1.png"
-                          alt="col-icon"
-                          height={40}
-                          width={40}
-                        />
+                        <div className="relative w-[90%] h-[90%]">
+                          <Image
+                            className="modal-img w-full h-full"
+                            src={currentOpenedNft.media[0].thumbnail}
+                            alt="col-icon"
+                            fill
+                          />
+                          <Image
+                            className="absolute bottom-5 right-2 "
+                            src="/opensea-logo-white-01 1.png"
+                            alt="col-icon"
+                            height={40}
+                            width={40}
+                          />
+                        </div>
                       </div>
                       <div className="rightSide w-[48%] h-full flex flex-col justify-center items-start relative">
                         <h1

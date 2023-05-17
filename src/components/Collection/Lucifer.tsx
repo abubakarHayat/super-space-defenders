@@ -1,6 +1,10 @@
 import { useState } from "react";
 import Image from "next/image";
-import { usePrepareContractWrite, useContractWrite } from "wagmi";
+import {
+  usePrepareContractWrite,
+  useContractWrite,
+  useWaitForTransaction,
+} from "wagmi";
 import { parseEther, formatBytes32String } from "ethers/lib/utils.js";
 import luciferAbi from "../../abi/lucifer-abi.json";
 
@@ -27,18 +31,30 @@ function CollectionLucifer() {
       console.log("Success", data);
     },
     onError(error) {
-      toast.error("Error in Minting!");
+      toast.error(error.message);
       console.log("Error", error);
     },
     onSettled(data, error) {
       console.log("Settled", { data, error });
     },
   });
-  const { writeAsync } = useContractWrite(config);
+  const { writeAsync, data } = useContractWrite(config);
+
+  const { isLoading, isError, isSuccess } = useWaitForTransaction({
+    hash: data?.hash,
+  });
 
   const handleMint = async () => {
     try {
       const tx = await writeAsync?.();
+      if (isLoading) {
+        toast("Transaction in process..");
+      } else if (isError) {
+        toast.error("Error in minting!");
+      } else if (isSuccess) {
+        toast.success("Minted!");
+        console.log(data);
+      }
       let reciept = tx?.wait();
       console.log("Receipt: ", reciept);
     } catch (error) {
